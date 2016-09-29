@@ -5,7 +5,7 @@
 ### 使用方法:
 1.导入工程的 CLUPnP 文件夹。
 
-    文件下包含的第三方类有[GCDAsyncUdpSocket](https://github.com/robbiehanson/CocoaAsyncSocket), GDataXMLNode
+文件下包含的第三方类有[GCDAsyncUdpSocket](https://github.com/robbiehanson/CocoaAsyncSocket), GDataXMLNode
 
         GDataXMLNode的使用需要注意：
 
@@ -35,9 +35,8 @@
         // 暂停
         - (void)pause;
 
-感谢
 ==============
-[Eliyar's Blog](https://eliyar.biz)
+感谢[Eliyar's Blog](https://eliyar.biz)
 * [基于DLNA实现iOS，Android投屏：SSDP发现设备](https://eliyar.biz/DLNA_with_iOS_Android_Part_1_Find_Device_Using_SSDP/)
 * [基于DLNA实现iOS，Android投屏：SOAP控制设备](https://eliyar.biz/DLNA_with_iOS_Android_Part_2_Control_Using_SOAP/)
 
