@@ -1,0 +1,410 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D3D8A2081D9CE147003769B8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D8A2071D9CE147003769B8 /* main.m */; };
+		D3D8A20B1D9CE147003769B8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D8A20A1D9CE147003769B8 /* AppDelegate.m */; };
+		D3D8A20E1D9CE147003769B8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D8A20D1D9CE147003769B8 /* ViewController.m */; };
+		D3D8A2111D9CE147003769B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3D8A20F1D9CE147003769B8 /* Main.storyboard */; };
+		D3D8A2141D9CE147003769B8 /* DLNA_UPnP.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3D8A2121D9CE147003769B8 /* DLNA_UPnP.xcdatamodeld */; };
+		D3D8A2161D9CE147003769B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3D8A2151D9CE147003769B8 /* Assets.xcassets */; };
+		D3D8A2191D9CE147003769B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3D8A2171D9CE147003769B8 /* LaunchScreen.storyboard */; };
+		D3D8A2241D9CE3BB003769B8 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D8A2231D9CE3BB003769B8 /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D3D8A2281D9CE3C2003769B8 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D8A2271D9CE3C2003769B8 /* GCDAsyncUdpSocket.m */; };
+		D3D8A22B1D9CE3E7003769B8 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D8A22A1D9CE3E7003769B8 /* libxml2.tbd */; };
+		D3D8A22E1D9CEADA003769B8 /* CLUPnPRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D8A22D1D9CEADA003769B8 /* CLUPnPRenderer.m */; };
+		D3D8A2311D9CEB24003769B8 /* CLUdpAssociation.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D8A2301D9CEB24003769B8 /* CLUdpAssociation.m */; };
+		D3D8A2341D9CEC54003769B8 /* CLUPnPModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D8A2331D9CEC54003769B8 /* CLUPnPModel.m */; };
+		D3D8A2371D9CED56003769B8 /* CLSearchDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D8A2361D9CED56003769B8 /* CLSearchDeviceController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		D3D8A2031D9CE147003769B8 /* DLNA_UPnP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DLNA_UPnP.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3D8A2071D9CE147003769B8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D3D8A2091D9CE147003769B8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D3D8A20A1D9CE147003769B8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D3D8A20C1D9CE147003769B8 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		D3D8A20D1D9CE147003769B8 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		D3D8A2101D9CE147003769B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D3D8A2131D9CE147003769B8 /* DLNA_UPnP.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DLNA_UPnP.xcdatamodel; sourceTree = "<group>"; };
+		D3D8A2151D9CE147003769B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D3D8A2181D9CE147003769B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D3D8A21A1D9CE147003769B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3D8A2221D9CE3BB003769B8 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		D3D8A2231D9CE3BB003769B8 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
+		D3D8A2261D9CE3C2003769B8 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		D3D8A2271D9CE3C2003769B8 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		D3D8A22A1D9CE3E7003769B8 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		D3D8A22C1D9CEADA003769B8 /* CLUPnPRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLUPnPRenderer.h; sourceTree = "<group>"; };
+		D3D8A22D1D9CEADA003769B8 /* CLUPnPRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLUPnPRenderer.m; sourceTree = "<group>"; };
+		D3D8A22F1D9CEB24003769B8 /* CLUdpAssociation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLUdpAssociation.h; sourceTree = "<group>"; };
+		D3D8A2301D9CEB24003769B8 /* CLUdpAssociation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLUdpAssociation.m; sourceTree = "<group>"; };
+		D3D8A2321D9CEC54003769B8 /* CLUPnPModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLUPnPModel.h; sourceTree = "<group>"; };
+		D3D8A2331D9CEC54003769B8 /* CLUPnPModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLUPnPModel.m; sourceTree = "<group>"; };
+		D3D8A2351D9CED56003769B8 /* CLSearchDeviceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSearchDeviceController.h; sourceTree = "<group>"; };
+		D3D8A2361D9CED56003769B8 /* CLSearchDeviceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSearchDeviceController.m; sourceTree = "<group>"; };
+		D3D8A2381D9CEFFE003769B8 /* CLUPnP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLUPnP.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D3D8A2001D9CE147003769B8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D3D8A22B1D9CE3E7003769B8 /* libxml2.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D3D8A1FA1D9CE147003769B8 = {
+			isa = PBXGroup;
+			children = (
+				D3D8A2051D9CE147003769B8 /* DLNA_UPnP */,
+				D3D8A2041D9CE147003769B8 /* Products */,
+				D3D8A2291D9CE3E7003769B8 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		D3D8A2041D9CE147003769B8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D3D8A2031D9CE147003769B8 /* DLNA_UPnP.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D3D8A2051D9CE147003769B8 /* DLNA_UPnP */ = {
+			isa = PBXGroup;
+			children = (
+				D3D8A2201D9CE38D003769B8 /* CLUPnP */,
+				D3D8A2091D9CE147003769B8 /* AppDelegate.h */,
+				D3D8A20A1D9CE147003769B8 /* AppDelegate.m */,
+				D3D8A20C1D9CE147003769B8 /* ViewController.h */,
+				D3D8A20D1D9CE147003769B8 /* ViewController.m */,
+				D3D8A2351D9CED56003769B8 /* CLSearchDeviceController.h */,
+				D3D8A2361D9CED56003769B8 /* CLSearchDeviceController.m */,
+				D3D8A20F1D9CE147003769B8 /* Main.storyboard */,
+				D3D8A2151D9CE147003769B8 /* Assets.xcassets */,
+				D3D8A2171D9CE147003769B8 /* LaunchScreen.storyboard */,
+				D3D8A21A1D9CE147003769B8 /* Info.plist */,
+				D3D8A2121D9CE147003769B8 /* DLNA_UPnP.xcdatamodeld */,
+				D3D8A2061D9CE147003769B8 /* Supporting Files */,
+			);
+			path = DLNA_UPnP;
+			sourceTree = "<group>";
+		};
+		D3D8A2061D9CE147003769B8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D3D8A2071D9CE147003769B8 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D3D8A2201D9CE38D003769B8 /* CLUPnP */ = {
+			isa = PBXGroup;
+			children = (
+				D3D8A2381D9CEFFE003769B8 /* CLUPnP.h */,
+				D3D8A22F1D9CEB24003769B8 /* CLUdpAssociation.h */,
+				D3D8A2301D9CEB24003769B8 /* CLUdpAssociation.m */,
+				D3D8A22C1D9CEADA003769B8 /* CLUPnPRenderer.h */,
+				D3D8A22D1D9CEADA003769B8 /* CLUPnPRenderer.m */,
+				D3D8A2321D9CEC54003769B8 /* CLUPnPModel.h */,
+				D3D8A2331D9CEC54003769B8 /* CLUPnPModel.m */,
+				D3D8A2251D9CE3C2003769B8 /* CocoaAsyncSocket */,
+				D3D8A2211D9CE3BB003769B8 /* GData */,
+			);
+			path = CLUPnP;
+			sourceTree = "<group>";
+		};
+		D3D8A2211D9CE3BB003769B8 /* GData */ = {
+			isa = PBXGroup;
+			children = (
+				D3D8A2221D9CE3BB003769B8 /* GDataXMLNode.h */,
+				D3D8A2231D9CE3BB003769B8 /* GDataXMLNode.m */,
+			);
+			path = GData;
+			sourceTree = "<group>";
+		};
+		D3D8A2251D9CE3C2003769B8 /* CocoaAsyncSocket */ = {
+			isa = PBXGroup;
+			children = (
+				D3D8A2261D9CE3C2003769B8 /* GCDAsyncUdpSocket.h */,
+				D3D8A2271D9CE3C2003769B8 /* GCDAsyncUdpSocket.m */,
+			);
+			path = CocoaAsyncSocket;
+			sourceTree = "<group>";
+		};
+		D3D8A2291D9CE3E7003769B8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D3D8A22A1D9CE3E7003769B8 /* libxml2.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D3D8A2021D9CE147003769B8 /* DLNA_UPnP */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D3D8A21D1D9CE147003769B8 /* Build configuration list for PBXNativeTarget "DLNA_UPnP" */;
+			buildPhases = (
+				D3D8A1FF1D9CE147003769B8 /* Sources */,
+				D3D8A2001D9CE147003769B8 /* Frameworks */,
+				D3D8A2011D9CE147003769B8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DLNA_UPnP;
+			productName = DLNA_UPnP;
+			productReference = D3D8A2031D9CE147003769B8 /* DLNA_UPnP.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D3D8A1FB1D9CE147003769B8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = ClaudeLi;
+				TargetAttributes = {
+					D3D8A2021D9CE147003769B8 = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = D3D8A1FE1D9CE147003769B8 /* Build configuration list for PBXProject "DLNA_UPnP" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D3D8A1FA1D9CE147003769B8;
+			productRefGroup = D3D8A2041D9CE147003769B8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D3D8A2021D9CE147003769B8 /* DLNA_UPnP */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D3D8A2011D9CE147003769B8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D3D8A2191D9CE147003769B8 /* LaunchScreen.storyboard in Resources */,
+				D3D8A2161D9CE147003769B8 /* Assets.xcassets in Resources */,
+				D3D8A2111D9CE147003769B8 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D3D8A1FF1D9CE147003769B8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D3D8A2371D9CED56003769B8 /* CLSearchDeviceController.m in Sources */,
+				D3D8A20E1D9CE147003769B8 /* ViewController.m in Sources */,
+				D3D8A22E1D9CEADA003769B8 /* CLUPnPRenderer.m in Sources */,
+				D3D8A2311D9CEB24003769B8 /* CLUdpAssociation.m in Sources */,
+				D3D8A2341D9CEC54003769B8 /* CLUPnPModel.m in Sources */,
+				D3D8A20B1D9CE147003769B8 /* AppDelegate.m in Sources */,
+				D3D8A2241D9CE3BB003769B8 /* GDataXMLNode.m in Sources */,
+				D3D8A2081D9CE147003769B8 /* main.m in Sources */,
+				D3D8A2281D9CE3C2003769B8 /* GCDAsyncUdpSocket.m in Sources */,
+				D3D8A2141D9CE147003769B8 /* DLNA_UPnP.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D3D8A20F1D9CE147003769B8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D3D8A2101D9CE147003769B8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D3D8A2171D9CE147003769B8 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D3D8A2181D9CE147003769B8 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D3D8A21B1D9CE147003769B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D3D8A21C1D9CE147003769B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D3D8A21E1D9CE147003769B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				INFOPLIST_FILE = DLNA_UPnP/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ClaudeLi.DLNA-UPnP";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D3D8A21F1D9CE147003769B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				INFOPLIST_FILE = DLNA_UPnP/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ClaudeLi.DLNA-UPnP";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D3D8A1FE1D9CE147003769B8 /* Build configuration list for PBXProject "DLNA_UPnP" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D3D8A21B1D9CE147003769B8 /* Debug */,
+				D3D8A21C1D9CE147003769B8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D3D8A21D1D9CE147003769B8 /* Build configuration list for PBXNativeTarget "DLNA_UPnP" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D3D8A21E1D9CE147003769B8 /* Debug */,
+				D3D8A21F1D9CE147003769B8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D3D8A2121D9CE147003769B8 /* DLNA_UPnP.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D3D8A2131D9CE147003769B8 /* DLNA_UPnP.xcdatamodel */,
+			);
+			currentVersion = D3D8A2131D9CE147003769B8 /* DLNA_UPnP.xcdatamodel */;
+			path = DLNA_UPnP.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = D3D8A1FB1D9CE147003769B8 /* Project object */;
+}
