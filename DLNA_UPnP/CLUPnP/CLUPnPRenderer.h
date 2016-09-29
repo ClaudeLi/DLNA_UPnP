@@ -24,6 +24,15 @@
 // 暂停
 - (void)pause;
 
+// 结束
+- (void)stop;
+
+// 获取播放进度
+- (void)getPositionInfo;
+
+// 获取播放状态
+- (void)getTransportInfo;
+
 // 跳转至特定进度或视频
 // Unit：REL_TIME（跳转到某个进度）或 TRACK_NR（跳转到某个视频）。
 // Target： 目标值，可以是 00:02:21 格式的进度或者整数的 TRACK_NR。

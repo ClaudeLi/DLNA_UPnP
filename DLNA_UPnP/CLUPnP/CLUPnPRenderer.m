@@ -63,6 +63,31 @@
     [self sendRequestWithData:xmlStr action:@"Pause"];
 }
 
+- (void)stop{
+    GDataXMLElement *command = [GDataXMLElement elementWithName:@"u:Stop"];
+    [command addChild:[GDataXMLElement attributeWithName:@"xmlns:u" stringValue:@"urn:schemas-upnp-org:service:AVTransport:1"]];
+    [command addChild:[GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"]];
+    NSString *xmlStr = [self prepareXMLFileWithCommand:command];
+    [self sendRequestWithData:xmlStr action:@"Stop"];
+}
+
+- (void)getPositionInfo{
+    GDataXMLElement *command = [GDataXMLElement elementWithName:@"u:GetPositionInfo"];
+    [command addChild:[GDataXMLElement attributeWithName:@"xmlns:u" stringValue:@"urn:schemas-upnp-org:service:AVTransport:1"]];
+    [command addChild:[GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"]];
+    [command addChild:[GDataXMLElement elementWithName:@"MediaDuration"]];
+    NSString *xmlStr = [self prepareXMLFileWithCommand:command];
+    [self sendRequestWithData:xmlStr action:@"GetPositionInfo"];
+}
+
+- (void)getTransportInfo{
+    GDataXMLElement *command = [GDataXMLElement elementWithName:@"u:GetTransportInfo"];
+    [command addChild:[GDataXMLElement attributeWithName:@"xmlns:u" stringValue:@"urn:schemas-upnp-org:service:AVTransport:1"]];
+    [command addChild:[GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"]];
+    NSString *xmlStr = [self prepareXMLFileWithCommand:command];
+    [self sendRequestWithData:xmlStr action:@"GetTransportInfo"];
+}
+
 - (void)seekToTarget:(NSString *)target Unit:(NSString *)unit{
     GDataXMLElement *command = [GDataXMLElement elementWithName:@"u:Seek"];
     [command addChild:[GDataXMLElement attributeWithName:@"xmlns:u" stringValue:@"urn:schemas-upnp-org:service:AVTransport:1"]];
@@ -116,7 +141,7 @@
         if ([[element name] hasSuffix:@"Body"]) {
             [self resultsWith:needArr];
         }else{
-            
+            NSLog(@"未定义响应/Body错误");
         }
     }
 }
@@ -128,7 +153,9 @@
             NSLog(@"设置URI成功");
             [self play];
         }else if ([[ele name] hasSuffix:@"GetPositionInfoResponse"]){
-            NSLog(@"已获取进度");
+            NSLog(@"已获取进度, 可再进行解析");
+        }else if ([[ele name] hasSuffix:@"GetTransportInfoResponse"]){
+            NSLog(@"已获取状态, 可再进行解析");
         }else if ([[ele name] hasSuffix:@"PauseResponse"]){
             NSLog(@"暂停");
         }else if ([[ele name] hasSuffix:@"PlayResponse"]){
@@ -138,7 +165,7 @@
         }else if ([[ele name] hasSuffix:@"SeekResponse"]){
             NSLog(@"跳转成功");
         }else{
-            NSLog(@"未定义响应");
+            NSLog(@"未定义响应/UPnP错误");
         }
     }
 }
