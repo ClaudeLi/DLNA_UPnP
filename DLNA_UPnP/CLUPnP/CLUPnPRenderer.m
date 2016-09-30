@@ -58,7 +58,6 @@
     GDataXMLElement *command = [GDataXMLElement elementWithName:@"u:Pause"];
     [command addChild:[GDataXMLElement attributeWithName:@"xmlns:u" stringValue:@"urn:schemas-upnp-org:service:AVTransport:1"]];
     [command addChild:[GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"]];
-    [command addChild:[GDataXMLElement elementWithName:@"Speed" stringValue:@"1"]];
     NSString *xmlStr = [self prepareXMLFileWithCommand:command];
     [self sendRequestWithData:xmlStr action:@"Pause"];
 }
@@ -75,7 +74,6 @@
     GDataXMLElement *command = [GDataXMLElement elementWithName:@"u:GetPositionInfo"];
     [command addChild:[GDataXMLElement attributeWithName:@"xmlns:u" stringValue:@"urn:schemas-upnp-org:service:AVTransport:1"]];
     [command addChild:[GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"]];
-    [command addChild:[GDataXMLElement elementWithName:@"MediaDuration"]];
     NSString *xmlStr = [self prepareXMLFileWithCommand:command];
     [self sendRequestWithData:xmlStr action:@"GetPositionInfo"];
 }
