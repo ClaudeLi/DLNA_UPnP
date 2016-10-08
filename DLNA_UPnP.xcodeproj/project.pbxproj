@@ -90,7 +90,6 @@
 		D3D8A2051D9CE147003769B8 /* DLNA_UPnP */ = {
 			isa = PBXGroup;
 			children = (
-				D34E86181DA8DB1E009F5E6B /* Device.xml */,
 				D3D8A2201D9CE38D003769B8 /* CLUPnP */,
 				D3D8A2091D9CE147003769B8 /* AppDelegate.h */,
 				D3D8A20A1D9CE147003769B8 /* AppDelegate.m */,
@@ -101,6 +100,7 @@
 				D34E86131DA8C21C009F5E6B /* CLControlViewController.h */,
 				D34E86141DA8C21C009F5E6B /* CLControlViewController.m */,
 				D34E86151DA8C21C009F5E6B /* CLControlViewController.xib */,
+				D34E86181DA8DB1E009F5E6B /* Device.xml */,
 				D3D8A20F1D9CE147003769B8 /* Main.storyboard */,
 				D3D8A2151D9CE147003769B8 /* Assets.xcassets */,
 				D3D8A2171D9CE147003769B8 /* LaunchScreen.storyboard */,
