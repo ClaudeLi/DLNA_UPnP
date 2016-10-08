@@ -8,6 +8,9 @@
 
 #import "CLControlViewController.h"
 
+//http://live.hkstv.hk.lxdns.com/live/hks/playlist.m3u8
+static NSString *urlStr = @"http://live.hkstv.hk.lxdns.com/live/hks/playlist.m3u8";
+
 @interface CLControlViewController ()<CLUPnPRemdererDelegate>{
     BOOL _isPlaying;
     CLUPnPRenderer *render;
@@ -22,7 +25,7 @@
     
     render = [[CLUPnPRenderer alloc] initWithModel:self.model];
     render.delegate = self;
-    [render setAVTransportURL:@"http://v.tiaooo.com/llbizosAzGhJPXC0H4AHLTGHl42W"];
+    [render setAVTransportURL:urlStr];
     _isPlaying = YES;
 }
 
