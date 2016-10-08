@@ -21,9 +21,9 @@
         // 停止
         - (void)stop;
         
-        *[协议 CLUdpAssociationDelegate]
-         回调方法：
-        * (void)updSearchResultsWith:(CLUPnPModel *)model;
+        [协议 CLUdpAssociationDelegate]
+        回调方法：
+        - (void)updSearchResultsWith:(CLUPnPModel *)model;
 
 3.控制设备 CLUPnPRenderer.h
         
@@ -59,11 +59,13 @@
         // 设置音频值 value->整数字符串
         - (void)setVolumeWith:(NSString *)value;
 
-        * [协议 CLUPnPRemdererDelegate]
-         回调方法：
-        * (void)getPositionWithXMLElement:(GDataXMLElement *)element;   //获取播放进度
-        * (void)getTransportWithXMLElement:(GDataXMLElement *)element;  //获取播放状态
-        * (void)getVolumeWithXMLElement:(GDataXMLElement *)element;     //获取音频信息
+        
+        [协议 CLUPnPRemdererDelegate]
+        回调方法：
+        - (void)getPositionWithXMLElement:(GDataXMLElement *)element;   //获取播放进度
+        - (void)getTransportWithXMLElement:(GDataXMLElement *)element;  //获取播放状态
+        - (void)getVolumeWithXMLElement:(GDataXMLElement *)element;     //获取音频信息
+
 
 ==============
 感谢[Eliyar's Blog](https://eliyar.biz)
