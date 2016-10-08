@@ -6,8 +6,6 @@
 //  Copyright © 2016年 ClaudeLi. All rights reserved.
 //
 
-#import "CLUPnPRenderer.h"
-#import "CLUPnPModel.h"
 #import "CLUPnP.h"
 
 @implementation CLUPnPRenderer

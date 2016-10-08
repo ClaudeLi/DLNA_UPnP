@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import "GDataXMLNode.h"
 
+@class GDataXMLElement;
 @protocol CLUPnPRemdererDelegate <NSObject>
 
 - (void)getPositionWithXMLElement:(GDataXMLElement *)element;   //获取播放进度

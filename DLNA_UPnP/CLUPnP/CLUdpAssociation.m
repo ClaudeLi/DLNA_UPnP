@@ -6,9 +6,6 @@
 //  Copyright © 2016年 ClaudeLi. All rights reserved.
 //
 
-#import "CLUdpAssociation.h"
-#import "CLUPnPModel.h"
-#import "GDataXMLNode.h"
 #import "CLUPnP.h"
 
 @implementation CLUdpAssociation{

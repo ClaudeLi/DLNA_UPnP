@@ -11,6 +11,7 @@
 
 #import "CLUdpAssociation.h"
 #import "CLUPnPRenderer.h"
+#import "GDataXMLNode.h"
 #import "CLUPnPModel.h"
 
 static NSString *ssdpAddres = @"239.255.255.250";
