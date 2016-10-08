@@ -7,6 +7,7 @@
 //
 
 #import "CLUPnP.h"
+#import "GDataXMLNode.h"
 
 @implementation CLUdpAssociation{
     NSTimer *_timer;
