@@ -13,6 +13,7 @@
             c.在Build Phases->compile sources -> GDataXMLNode.m, ARC编译MRC加 -fno-objc-arc
 
 2.搜索设备 CLUdpAssociation.h <有bug待改进> 
+        
         /**
         搜索
         */
@@ -27,6 +28,7 @@
         - (void)updSearchResultsWith:(CLUPnPModel *)model;
 
 3.控制设备 CLUPnPRenderer.h
+        
         /**
         初始化
         @param model 搜索得到的UPnPModel
