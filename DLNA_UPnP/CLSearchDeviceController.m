@@ -8,6 +8,7 @@
 
 #import "CLSearchDeviceController.h"
 #import "CLUPnP/CLUPnP.h"
+#import "CLControlViewController.h"
 
 static NSString *cellIdentifier = @"cellIdentifier";
 @interface CLSearchDeviceController ()<UITableViewDataSource, UITableViewDelegate, CLUdpAssociationDelegate>
@@ -49,8 +50,11 @@ static NSString *cellIdentifier = @"cellIdentifier";
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [upd stop];
+    self.array = nil;
+    [self.tableView reloadData];
 }
 
+#pragma mark -
 #pragma mark -- 搜索协议回调 --
 - (void)updSearchResultsWith:(CLUPnPModel *)model{
     [self.dataArray addObject:model];
@@ -61,7 +65,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
 
 - (void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
-    self.tableView.frame = CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height - 20);
+    self.tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
 }
 
 - (UITableView *)tableView{
@@ -69,8 +73,6 @@ static NSString *cellIdentifier = @"cellIdentifier";
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.backgroundColor = [UIColor whiteColor];
-        _tableView.tableFooterView = [UIView new];
         _tableView.separatorStyle = NO;
     }
     return _tableView;
@@ -102,21 +104,15 @@ static NSString *cellIdentifier = @"cellIdentifier";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row < self.array.count) {
         CLUPnPModel *model = self.array[indexPath.row];
-        CLUPnPRenderer *render = [[CLUPnPRenderer alloc] initWithModel:model];
-        [render setAVTransportURL:@"http://v.tiaooo.com/llbizosAzGhJPXC0H4AHLTGHl42W"];
+        
+        CLControlViewController *controlVC = [[CLControlViewController alloc] init];
+        controlVC.model = model;
+        [self.navigationController pushViewController:controlVC animated:YES];
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 50.0f;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 0.1f;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 0.1f;
 }
 
 

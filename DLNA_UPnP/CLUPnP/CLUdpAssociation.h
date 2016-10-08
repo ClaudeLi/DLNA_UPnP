@@ -23,9 +23,15 @@
 
 @property (nonatomic,weak) id<CLUdpAssociationDelegate>delegate;
 
-// 搜索
+
+/**
+ 搜索
+ */
 - (void)search;
-// 停止
+
+/**
+ 停止
+ */
 - (void)stop;
 
 @end

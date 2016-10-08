@@ -28,9 +28,8 @@
 }
 
 - (void)clickButtonAction{
-    NSLog(@"11");
     CLSearchDeviceController *search = [[CLSearchDeviceController alloc] init];
-    [self presentViewController:search animated:YES completion:nil];
+    [self.navigationController pushViewController:search animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

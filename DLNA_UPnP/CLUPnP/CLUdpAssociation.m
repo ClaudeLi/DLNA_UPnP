@@ -9,11 +9,11 @@
 #import "CLUdpAssociation.h"
 #import "CLUPnPModel.h"
 #import "GDataXMLNode.h"
+#import "CLUPnP.h"
 
-static NSString *ssdpAddres = @"239.255.255.250";
-static UInt16 ssdpPort = 1900;
-
-@implementation CLUdpAssociation
+@implementation CLUdpAssociation{
+    NSTimer *_timer;
+}
 
 - (instancetype)init{
     self = [super init];
@@ -23,17 +23,28 @@ static UInt16 ssdpPort = 1900;
     return self;
 }
 
+- (NSString *)getSearchString{
+    return [NSString stringWithFormat:@"M-SEARCH * HTTP/1.1\r\nHOST: %@:%d\r\nMAN: \"ssdp:discover\"\r\nMX: 3\r\nST: %@\r\nUSER-AGENT: iOS UPnP/1.1 TestApp/1.0\r\n\r\n", ssdpAddres, ssdpPort, serviceAVTransport];
+}
+
 - (void)search{
     NSError *error;
-    NSData * sendData = [@"M-SEARCH * HTTP/1.1\r\nHOST: 239.255.255.250:1900\r\nMAN: \"ssdp:discover\"\r\nMX: 3\r\nST: urn:schemas-upnp-org:service:AVTransport:1\r\nUSER-AGENT: iOS UPnP/1.1 TestApp/1.0\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding];
+    NSData * sendData = [[self getSearchString] dataUsingEncoding:NSUTF8StringEncoding];
     [udpSocket sendData:sendData toHost:ssdpAddres port:ssdpPort withTimeout:0 tag:0];
     [udpSocket bindToPort:ssdpPort error:&error];
     [udpSocket joinMulticastGroup:ssdpAddres error:&error];
     [udpSocket beginReceiving:&error];
+    NSDate *date = [NSDate dateWithTimeIntervalSinceNow:15];
+    [_timer invalidate];
+    _timer = nil;
+    _timer = [[NSTimer alloc] initWithFireDate:date interval:1 target:self selector:@selector(stop) userInfo:nil repeats:NO];
+    [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
 }
 
 - (void)stop{
     [udpSocket close];
+    [_timer invalidate];
+    _timer = nil;
 }
 
 #pragma mark -
@@ -110,30 +121,12 @@ withFilterContext:(nullable id)filterContext{
                                 for (int k = 0; k < [serviceListArray count]; k++) {
                                     GDataXMLElement *listEle = [serviceListArray objectAtIndex:k];
                                     if ([listEle.name isEqualToString:@"service"]) {
-                                        if ([[listEle stringValue] rangeOfString:@"urn:schemas-upnp-org:service:AVTransport:1"].location != NSNotFound) {
-                                            NSArray *needArr = [listEle children];
-                                            for (int m = 0; m < needArr.count; m++) {
-                                                GDataXMLElement *needEle = [needArr objectAtIndex:m];
-                                                if ([needEle.name isEqualToString:@"serviceType"]) {
-                                                    model.serviceType = [needEle stringValue];
-                                                }
-                                                if ([needEle.name isEqualToString:@"serviceId"]) {
-                                                    model.serviceId = [needEle stringValue];
-                                                }
-                                                if ([needEle.name isEqualToString:@"controlURL"]) {
-                                                    model.controlURL = [needEle stringValue];
-                                                }
-                                                if ([needEle.name isEqualToString:@"eventSubURL"]) {
-                                                    model.eventSubURL = [needEle stringValue];
-                                                }
-                                                if ([needEle.name isEqualToString:@"SCPDURL"]) {
-                                                    model.SCPDURL = [needEle stringValue];
-                                                }
-                                            }
-                                            continue;
+                                        if ([[listEle stringValue] rangeOfString:serviceAVTransport].location != NSNotFound) {
+                                            [model.AVTransport setArray:[listEle children]];
+                                        }else if ([[listEle stringValue] rangeOfString:serviceRenderingControl].location != NSNotFound){
+                                            [model.RenderingControl setArray:[listEle children]];
                                         }
                                     }
-                                    
                                 }
                                 continue;
                             }
@@ -141,7 +134,7 @@ withFilterContext:(nullable id)filterContext{
                         continue;
                     }
                 }
-                if (model.controlURL) {
+                if (model.AVTransport.controlURL) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         if ([self.delegate respondsToSelector:@selector(updSearchResultsWith:)]) {
                             [self.delegate updSearchResultsWith:model];

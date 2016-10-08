@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CLControlViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3L3-ZU-N1i">
+                    <state key="normal" title="播放/暂停"/>
+                    <connections>
+                        <action selector="playOrPause:" destination="-1" eventType="touchUpInside" id="hFd-nc-2JZ"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vnW-bs-cFP">
+                    <state key="normal" title="00:00:01"/>
+                    <connections>
+                        <action selector="seekTo01:" destination="-1" eventType="touchUpInside" id="Unk-D9-m0u"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ay-2z-Jlc">
+                    <state key="normal" title="00:00:11"/>
+                    <connections>
+                        <action selector="seekTo11:" destination="-1" eventType="touchUpInside" id="Aeb-Sq-aUQ"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="REF-hg-8vW">
+                    <state key="normal" title="关闭"/>
+                    <connections>
+                        <action selector="closeAction:" destination="-1" eventType="touchUpInside" id="upz-xr-LrK"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mDO-yv-K2A">
+                    <state key="normal" title="Position"/>
+                    <connections>
+                        <action selector="getPosition:" destination="-1" eventType="touchUpInside" id="hpc-1z-5Dl"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xhG-TK-TXD">
+                    <state key="normal" title="Transport"/>
+                    <connections>
+                        <action selector="getTransport:" destination="-1" eventType="touchUpInside" id="R6v-ow-R2V"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vby-3A-ENL">
+                    <state key="normal" title="V--"/>
+                    <connections>
+                        <action selector="subV:" destination="-1" eventType="touchUpInside" id="PZW-mu-DGF"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b2f-hI-LSW">
+                    <state key="normal" title="V++"/>
+                    <connections>
+                        <action selector="addV:" destination="-1" eventType="touchUpInside" id="RkL-ZB-1OG"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="b2f-hI-LSW" secondAttribute="trailing" constant="110" id="1Oz-rh-YkV"/>
+                <constraint firstItem="REF-hg-8vW" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Bk3-mX-GYt"/>
+                <constraint firstItem="mDO-yv-K2A" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="100" id="G10-Ig-NDk"/>
+                <constraint firstItem="3L3-ZU-N1i" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="HwP-Ir-g5u"/>
+                <constraint firstItem="b2f-hI-LSW" firstAttribute="top" secondItem="xhG-TK-TXD" secondAttribute="bottom" constant="40" id="K2c-HK-1oz"/>
+                <constraint firstItem="1Ay-2z-Jlc" firstAttribute="centerY" secondItem="3L3-ZU-N1i" secondAttribute="centerY" id="KhB-bg-yRA"/>
+                <constraint firstItem="xhG-TK-TXD" firstAttribute="centerY" secondItem="mDO-yv-K2A" secondAttribute="centerY" id="MmW-Zs-thx"/>
+                <constraint firstItem="3L3-ZU-N1i" firstAttribute="centerY" secondItem="vnW-bs-cFP" secondAttribute="centerY" id="PbF-Vm-wpn"/>
+                <constraint firstItem="3L3-ZU-N1i" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Xe7-sB-wYp"/>
+                <constraint firstItem="vnW-bs-cFP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="dpW-dW-jVS"/>
+                <constraint firstItem="3L3-ZU-N1i" firstAttribute="top" secondItem="REF-hg-8vW" secondAttribute="bottom" constant="100" id="dvL-RD-MUv"/>
+                <constraint firstAttribute="trailing" secondItem="xhG-TK-TXD" secondAttribute="trailing" constant="100" id="fRD-ex-7GP"/>
+                <constraint firstItem="xhG-TK-TXD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="380" id="hSl-km-EwV"/>
+                <constraint firstAttribute="trailing" secondItem="1Ay-2z-Jlc" secondAttribute="trailing" constant="30" id="haW-zF-0qq"/>
+                <constraint firstItem="b2f-hI-LSW" firstAttribute="centerY" secondItem="vby-3A-ENL" secondAttribute="centerY" id="rLp-3f-FIS"/>
+                <constraint firstItem="vby-3A-ENL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="110" id="tb9-XB-vu6"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

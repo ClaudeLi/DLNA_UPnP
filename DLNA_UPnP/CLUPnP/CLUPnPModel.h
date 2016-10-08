@@ -8,9 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CLUPnPModel : NSObject
-
-@property (nonatomic, copy) NSString *friendlyName;
+@interface CLServiceModel : NSObject
 
 @property (nonatomic, copy) NSString *serviceType;
 @property (nonatomic, copy) NSString *serviceId;
@@ -18,6 +16,19 @@
 @property (nonatomic, copy) NSString *eventSubURL;
 @property (nonatomic, copy) NSString *SCPDURL;
 
-@property (nonatomic, copy) NSString *urlHeader;
+- (void)setArray:(NSArray *)array;
 
 @end
+
+@interface CLUPnPModel : NSObject
+
+@property (nonatomic, copy) NSString *friendlyName;
+@property (nonatomic, copy) NSString *urlHeader;
+
+@property (nonatomic, strong) CLServiceModel *AVTransport;
+@property (nonatomic, strong) CLServiceModel *RenderingControl;
+
+@end
+
+
+

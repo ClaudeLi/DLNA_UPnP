@@ -8,19 +8,43 @@
 //
 
 #import "CLUPnPModel.h"
+#import "GDataXMLNode.h"
 
-@implementation CLUPnPModel
+@implementation CLServiceModel
 
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key
-{
-    if ([key isEqual:@""]) {
-        
+- (void)setArray:(NSArray *)array{
+    for (int m = 0; m < array.count; m++) {
+        GDataXMLElement *needEle = [array objectAtIndex:m];
+        if ([needEle.name isEqualToString:@"serviceType"]) {
+            self.serviceType = [needEle stringValue];
+        }
+        if ([needEle.name isEqualToString:@"serviceId"]) {
+            self.serviceId = [needEle stringValue];
+        }
+        if ([needEle.name isEqualToString:@"controlURL"]) {
+            self.controlURL = [needEle stringValue];
+        }
+        if ([needEle.name isEqualToString:@"eventSubURL"]) {
+            self.eventSubURL = [needEle stringValue];
+        }
+        if ([needEle.name isEqualToString:@"SCPDURL"]) {
+            self.SCPDURL = [needEle stringValue];
+        }
     }
 }
 
-- (id)valueForUndefinedKey:(NSString *)key
-{
-    return nil;
+@end
+
+
+@implementation CLUPnPModel
+
+- (instancetype)init{
+    self = [super init];
+    if (self) {
+        self.AVTransport = [[CLServiceModel alloc] init];
+        self.RenderingControl = [[CLServiceModel alloc] init];
+    }
+    return self;
 }
 
 @end

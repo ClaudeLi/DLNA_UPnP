@@ -7,8 +7,8 @@
 //
 
 #import "CLUPnPRenderer.h"
-#import "GDataXMLNode.h"
 #import "CLUPnPModel.h"
+#import "CLUPnP.h"
 
 @implementation CLUPnPRenderer
 
@@ -16,93 +16,133 @@
     self = [super init];
     if (self) {
         _model = model;
+        [self getVolume];
     }
     return self;
 }
 
 #pragma mark -
-#pragma mark -- 构造动作XML --
-- (NSString *)prepareXMLFileWithCommand:(GDataXMLElement *)xml{
+#pragma mark -- 构造主XML --
+- (NSString *)prepareXMLFileWithCommand:(GDataXMLElement *)xml serviceType:(NSString *)serviceType{
     GDataXMLElement *xmlEle = [GDataXMLElement elementWithName:@"s:Envelope"];
     [xmlEle addChild:[GDataXMLElement attributeWithName:@"s:encodingStyle" stringValue:@"http://schemas.xmlsoap.org/soap/encoding/"]];
     [xmlEle addChild:[GDataXMLElement attributeWithName:@"xmlns:s" stringValue:@"http://schemas.xmlsoap.org/soap/envelope/"]];
-    [xmlEle addChild:[GDataXMLElement attributeWithName:@"xmlns:u" stringValue:@"urn:schemas-upnp-org:service:AVTransport:1"]];
+    [xmlEle addChild:[GDataXMLElement attributeWithName:@"xmlns:u" stringValue:serviceType]];
     GDataXMLElement *command = [GDataXMLElement elementWithName:@"s:Body"];
     [command addChild:xml];
     [xmlEle addChild:command];
     return xmlEle.XMLString;
 }
 
-// 投屏 视频url
+#pragma mark -
+#pragma mark -- 构造AVTransport动作XML --
 - (void)setAVTransportURL:(NSString *)urlStr{
     GDataXMLElement *command = [GDataXMLElement elementWithName:@"u:SetAVTransportURI"];
-    [command addChild:[GDataXMLElement attributeWithName:@"xmlns:u" stringValue:@"urn:schemas-upnp-org:service:AVTransport:1"]];
+    [command addChild:[GDataXMLElement attributeWithName:@"xmlns:u" stringValue:serviceAVTransport]];
     [command addChild:[GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"]];
     [command addChild:[GDataXMLElement elementWithName:@"CurrentURI" stringValue:urlStr]];
     [command addChild:[GDataXMLElement elementWithName:@"CurrentURIMetaData"]];
-    NSString *xmlStr = [self prepareXMLFileWithCommand:command];
-    [self sendRequestWithData:xmlStr action:@"SetAVTransportURI"];
+    NSString *xmlStr = [self prepareXMLFileWithCommand:command serviceType:serviceAVTransport];
+    [self sendServiceAVTransportWithData:xmlStr action:@"SetAVTransportURI"];
 }
 
-// 播放视频
+
 - (void)play{
     GDataXMLElement *command = [GDataXMLElement elementWithName:@"u:Play"];
-    [command addChild:[GDataXMLElement attributeWithName:@"xmlns:u" stringValue:@"urn:schemas-upnp-org:service:AVTransport:1"]];
+    [command addChild:[GDataXMLElement attributeWithName:@"xmlns:u" stringValue:serviceAVTransport]];
     [command addChild:[GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"]];
     [command addChild:[GDataXMLElement elementWithName:@"Speed" stringValue:@"1"]];
-    NSString *xmlStr = [self prepareXMLFileWithCommand:command];
-    [self sendRequestWithData:xmlStr action:@"Play"];
+    NSString *xmlStr = [self prepareXMLFileWithCommand:command serviceType:serviceAVTransport];
+    [self sendServiceAVTransportWithData:xmlStr action:@"Play"];
 }
 
 - (void)pause{
     GDataXMLElement *command = [GDataXMLElement elementWithName:@"u:Pause"];
-    [command addChild:[GDataXMLElement attributeWithName:@"xmlns:u" stringValue:@"urn:schemas-upnp-org:service:AVTransport:1"]];
+    [command addChild:[GDataXMLElement attributeWithName:@"xmlns:u" stringValue:serviceAVTransport]];
     [command addChild:[GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"]];
-    NSString *xmlStr = [self prepareXMLFileWithCommand:command];
-    [self sendRequestWithData:xmlStr action:@"Pause"];
+    NSString *xmlStr = [self prepareXMLFileWithCommand:command serviceType:serviceAVTransport];
+    [self sendServiceAVTransportWithData:xmlStr action:@"Pause"];
 }
 
 - (void)stop{
     GDataXMLElement *command = [GDataXMLElement elementWithName:@"u:Stop"];
-    [command addChild:[GDataXMLElement attributeWithName:@"xmlns:u" stringValue:@"urn:schemas-upnp-org:service:AVTransport:1"]];
+    [command addChild:[GDataXMLElement attributeWithName:@"xmlns:u" stringValue:serviceAVTransport]];
     [command addChild:[GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"]];
-    NSString *xmlStr = [self prepareXMLFileWithCommand:command];
-    [self sendRequestWithData:xmlStr action:@"Stop"];
+    NSString *xmlStr = [self prepareXMLFileWithCommand:command serviceType:serviceAVTransport];
+    [self sendServiceAVTransportWithData:xmlStr action:@"Stop"];
 }
 
 - (void)getPositionInfo{
     GDataXMLElement *command = [GDataXMLElement elementWithName:@"u:GetPositionInfo"];
-    [command addChild:[GDataXMLElement attributeWithName:@"xmlns:u" stringValue:@"urn:schemas-upnp-org:service:AVTransport:1"]];
+    [command addChild:[GDataXMLElement attributeWithName:@"xmlns:u" stringValue:serviceAVTransport]];
     [command addChild:[GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"]];
-    NSString *xmlStr = [self prepareXMLFileWithCommand:command];
-    [self sendRequestWithData:xmlStr action:@"GetPositionInfo"];
+    NSString *xmlStr = [self prepareXMLFileWithCommand:command serviceType:serviceAVTransport];
+    [self sendServiceAVTransportWithData:xmlStr action:@"GetPositionInfo"];
 }
 
 - (void)getTransportInfo{
     GDataXMLElement *command = [GDataXMLElement elementWithName:@"u:GetTransportInfo"];
-    [command addChild:[GDataXMLElement attributeWithName:@"xmlns:u" stringValue:@"urn:schemas-upnp-org:service:AVTransport:1"]];
+    [command addChild:[GDataXMLElement attributeWithName:@"xmlns:u" stringValue:serviceAVTransport]];
     [command addChild:[GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"]];
-    NSString *xmlStr = [self prepareXMLFileWithCommand:command];
-    [self sendRequestWithData:xmlStr action:@"GetTransportInfo"];
+    NSString *xmlStr = [self prepareXMLFileWithCommand:command serviceType:serviceAVTransport];
+    [self sendServiceAVTransportWithData:xmlStr action:@"GetTransportInfo"];
 }
 
 - (void)seekToTarget:(NSString *)target Unit:(NSString *)unit{
     GDataXMLElement *command = [GDataXMLElement elementWithName:@"u:Seek"];
-    [command addChild:[GDataXMLElement attributeWithName:@"xmlns:u" stringValue:@"urn:schemas-upnp-org:service:AVTransport:1"]];
+    [command addChild:[GDataXMLElement attributeWithName:@"xmlns:u" stringValue:serviceAVTransport]];
     [command addChild:[GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"]];
     [command addChild:[GDataXMLElement elementWithName:@"Unit" stringValue:unit]];
     [command addChild:[GDataXMLElement elementWithName:@"Target" stringValue:target]];
-    NSString *xmlStr = [self prepareXMLFileWithCommand:command];
-    [self sendRequestWithData:xmlStr action:@"Seek"];
+    NSString *xmlStr = [self prepareXMLFileWithCommand:command serviceType:serviceAVTransport];
+    [self sendServiceAVTransportWithData:xmlStr action:@"Seek"];
 }
 
 
-- (void)sendRequestWithData:(NSString *)xmlStr action:(NSString *)action{
+#pragma mark -
+#pragma mark -- 构造RenderingControl动作XML --
+- (void)getVolume{
+    GDataXMLElement *command = [GDataXMLElement elementWithName:@"u:GetVolume"];
+    [command addChild:[GDataXMLElement attributeWithName:@"xmlns:u" stringValue:serviceRenderingControl]];
+    [command addChild:[GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"]];
+    [command addChild:[GDataXMLElement elementWithName:@"Channel" stringValue:@"Master"]];
+    NSString *xmlStr = [self prepareXMLFileWithCommand:command serviceType:serviceRenderingControl];
+    [self sendServiceRenderingControlWithData:xmlStr action:@"GetVolume"];
+}
+
+- (void)setVolumeWith:(NSString *)value{
+    GDataXMLElement *command = [GDataXMLElement elementWithName:@"u:SetVolume"];
+    [command addChild:[GDataXMLElement attributeWithName:@"xmlns:u" stringValue:serviceRenderingControl]];
+    [command addChild:[GDataXMLElement elementWithName:@"InstanceID" stringValue:@"0"]];
+    [command addChild:[GDataXMLElement elementWithName:@"Channel" stringValue:@"Master"]];
+    [command addChild:[GDataXMLElement elementWithName:@"DesiredVolume" stringValue:value]];
+    NSString *xmlStr = [self prepareXMLFileWithCommand:command serviceType:serviceRenderingControl];
+    [self sendServiceRenderingControlWithData:xmlStr action:@"SetVolume"];
+}
+
+#pragma mark -
+#pragma mark -- 动作请求 --
+- (void)sendServiceAVTransportWithData:(NSString *)xmlStr action:(NSString *)action{
     NSLog(@"xmlStr == %@", xmlStr);
-    NSString *SOAPAction = [NSString stringWithFormat:@"\"urn:schemas-upnp-org:service:AVTransport:1#%@\"", action];
+    [self requestWithJudge:YES xmlStr:xmlStr action:action];
+}
+
+- (void)sendServiceRenderingControlWithData:(NSString *)xmlStr action:(NSString *)action{
+    NSLog(@"xmlStr == %@", xmlStr);
+    [self requestWithJudge:NO xmlStr:xmlStr action:action];
+}
+
+- (void)requestWithJudge:(BOOL)judge xmlStr:(NSString *)xmlStr action:(NSString *)action{
+    NSString *SOAPAction;
+    NSString *urlString;
+    if (judge) {
+        SOAPAction = [NSString stringWithFormat:@"\"%@#%@\"", serviceAVTransport,action];
+        urlString = [self getUPnPURLWithUrlModel:_model.AVTransport urlHeader:_model.urlHeader];
+    }else{
+        SOAPAction = [NSString stringWithFormat:@"\"%@#%@\"", serviceRenderingControl,action];
+        urlString = [self getUPnPURLWithUrlModel:_model.RenderingControl urlHeader:_model.urlHeader];
+    }
     NSURLSession *session = [NSURLSession sharedSession];
-    
-    NSString *urlString = [self getUPnPURLWithUrlModel:_model];
     NSURL *url = [NSURL URLWithString:urlString];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     request.HTTPMethod = @"POST";
@@ -120,14 +160,16 @@
     [dataTask resume];
 }
 
-- (NSString *)getUPnPURLWithUrlModel:(CLUPnPModel *)model{
+- (NSString *)getUPnPURLWithUrlModel:(CLServiceModel *)model urlHeader:(NSString *)urlHeader{
     if ([[model.controlURL substringToIndex:1] isEqualToString:@"/"]) {
-        return [NSString stringWithFormat:@"%@%@", model.urlHeader, model.controlURL];
+        return [NSString stringWithFormat:@"%@%@", urlHeader, model.controlURL];
     }else{
-        return [NSString stringWithFormat:@"%@/%@", model.urlHeader, model.controlURL];
+        return [NSString stringWithFormat:@"%@/%@", urlHeader, model.controlURL];
     }
 }
 
+#pragma mark -
+#pragma mark -- 动作响应 --
 - (void)parseRequestResponseData:(NSData *)data{
     GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithData:data options:0 error:nil];
     GDataXMLElement *xmlEle = [xmlDoc rootElement];
@@ -150,10 +192,19 @@
         if ([[ele name] hasSuffix:@"SetAVTransportURIResponse"]) {
             NSLog(@"设置URI成功");
             [self play];
+            if (self.succeedBlock) {
+                self.succeedBlock();
+            }
         }else if ([[ele name] hasSuffix:@"GetPositionInfoResponse"]){
-            NSLog(@"已获取进度, 可再进行解析");
+            NSLog(@"已获取进度, 协议回调可再进行解析使用");
+            if ([self.delegate respondsToSelector:@selector(getPositionWithXMLElement:)]) {
+                [self.delegate getPositionWithXMLElement:ele];
+            }
         }else if ([[ele name] hasSuffix:@"GetTransportInfoResponse"]){
-            NSLog(@"已获取状态, 可再进行解析");
+            NSLog(@"已获取状态, 协议回调可再进行解析使用");
+            if ([self.delegate respondsToSelector:@selector(getTransportWithXMLElement:)]) {
+                [self.delegate getTransportWithXMLElement:ele];
+            }
         }else if ([[ele name] hasSuffix:@"PauseResponse"]){
             NSLog(@"暂停");
         }else if ([[ele name] hasSuffix:@"PlayResponse"]){
@@ -162,6 +213,13 @@
             NSLog(@"停止");
         }else if ([[ele name] hasSuffix:@"SeekResponse"]){
             NSLog(@"跳转成功");
+        }else if ([[ele name] hasSuffix:@"SetVolumeResponse"]){
+            NSLog(@"声音设置成功");
+        }else if ([[ele name] hasSuffix:@"GetVolumeResponse"]){
+            NSLog(@"已获取音量信息, 协议回调可再进行解析使用");
+            if ([self.delegate respondsToSelector:@selector(getVolumeWithXMLElement:)]) {
+                [self.delegate getVolumeWithXMLElement:ele];
+            }
         }else{
             NSLog(@"未定义响应/UPnP错误");
         }
