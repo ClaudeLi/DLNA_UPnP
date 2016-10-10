@@ -9,11 +9,13 @@
 #import "CLControlViewController.h"
 
 //http://live.hkstv.hk.lxdns.com/live/hks/playlist.m3u8
-static NSString *urlStr = @"http://live.hkstv.hk.lxdns.com/live/hks/playlist.m3u8";
+//http://222.73.132.145/vkphls.tc.qq.com/mp4/8/yZ_j6ME6N3hgRF2xg_m13zCxeLHcQzm9bVK0v_J-08OdcAVc0rmGCA/q4WgUBCu27O21hhzjGXkPCaHr1EkTFuUGbXKrNbjMACA-wleQI3oi3woUdjgP-BtBxW34UkmIxlQ_TkPGeqTLwghaijDM7oFlQwmCbieZPLUh33Q7f8eag/i0021mzabfm.p209.mp4/i0021mzabfm.p209.mp4.av.m3u8
+static NSString *urlStr = @"http://v.tiaooo.com/ltQ3C0vts84B-UZ9BZNvTo9lUzWU";
 
-@interface CLControlViewController ()<CLUPnPRemdererDelegate>{
+@interface CLControlViewController ()<CLUPnPResponseDelegate>{
     BOOL _isPlaying;
     CLUPnPRenderer *render;
+    NSInteger _valume;
 }
 
 @end
@@ -22,10 +24,13 @@ static NSString *urlStr = @"http://live.hkstv.hk.lxdns.com/live/hks/playlist.m3u
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _valume = 0;
+    
     
     render = [[CLUPnPRenderer alloc] initWithModel:self.model];
     render.delegate = self;
     [render setAVTransportURL:urlStr];
+    [render setNextAVTransportURI:@"http://v.tiaooo.com/llbizosAzGhJPXC0H4AHLTGHl42W"];
     _isPlaying = YES;
 }
 
@@ -52,6 +57,14 @@ static NSString *urlStr = @"http://live.hkstv.hk.lxdns.com/live/hks/playlist.m3u
     [render seekToTarget:@"00:00:11" Unit:unitREL_TIME];
 }
 
+- (IBAction)pro:(id)sender {
+    [render previous];
+}
+
+- (IBAction)next:(id)sender {
+    [render next];
+}
+
 - (IBAction)getPosition:(id)sender {
     [render getPositionInfo];
 }
@@ -69,17 +82,61 @@ static NSString *urlStr = @"http://live.hkstv.hk.lxdns.com/live/hks/playlist.m3u
 }
 
 #pragma mark -
-#pragma mark - CLUPnPRemdererDelegate -
-- (void)getPositionWithXMLElement:(GDataXMLElement *)element{
-    NSLog(@"%@", element);
+#pragma mark - CLUPnPResponseDelegate -
+- (void)upnpSetAVTransportURIResponse{
+//    [render play];
 }
 
-- (void)getTransportWithXMLElement:(GDataXMLElement *)element{
-    NSLog(@"%@", element);
+- (void)upnpGetTransportInfoResponse:(CLUPnPTransportInfo *)info{
+//    STOPPED
+    NSLog(@"%@ === %@", info.currentTransportState, info.currentTransportStatus);
+    if (!([info.currentTransportState isEqualToString:@"PLAYING"] || [info.currentTransportState isEqualToString:@"TRANSITIONING"])) {
+        [render play];
+    }
 }
 
-- (void)getVolumeWithXMLElement:(GDataXMLElement *)element{
-    NSLog(@"%@", element);
+- (void)upnpPlayResponse{
+    NSLog(@"播放");
+}
+
+- (void)upnpPauseResponse{
+    NSLog(@"暂停");
+}
+
+- (void)upnpStopResponse{
+    NSLog(@"停止");
+}
+
+- (void)upnpSeekResponse{
+    NSLog(@"跳转完成");
+}
+
+- (void)upnpPreviousResponse{
+    NSLog(@"前一个");
+}
+
+- (void)upnpNextResponse{
+    NSLog(@"下一个");
+}
+
+- (void)upnpSetVolumeResponse{
+    NSLog(@"设置音量成功");
+}
+
+- (void)upnpSetNextAVTransportURIResponse{
+    NSLog(@"设置下一个url成功");
+}
+
+- (void)upnpGetVolumeResponse:(NSString *)volume{
+    NSLog(@"音量=%@", volume);
+}
+
+- (void)upnpGetPositionInfoResponse:(CLUPnPAVPositionInfo *)info{
+    NSLog(@"%f, === %f === %f", info.trackDuration, info.absTime, info.relTime);
+}
+
+- (void)upnpUndefinedResponse:(NSString *)xmlString{
+    NSLog(@"xmlString = %@", xmlString);
 }
 
 

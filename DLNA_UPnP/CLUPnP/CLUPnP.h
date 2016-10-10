@@ -9,9 +9,16 @@
 #ifndef CLUPnP_h
 #define CLUPnP_h
 
-#import "CLUdpAssociation.h"
+#import "CLUPnPDevice.h"
 #import "CLUPnPRenderer.h"
 #import "CLUPnPModel.h"
+#import "CLUPnPAVPositionInfo.h"
+
+#ifdef DEBUG
+#define CLLog(s, ... ) NSLog( @"[%@ in line %d] => %@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
+#else
+#define CLLog(s, ... )
+#endif
 
 static NSString *ssdpAddres = @"239.255.255.250";
 static UInt16   ssdpPort = 1900;

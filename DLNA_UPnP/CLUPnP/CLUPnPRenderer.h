@@ -8,23 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-
-@class GDataXMLElement;
-@protocol CLUPnPRemdererDelegate <NSObject>
-
-- (void)getPositionWithXMLElement:(GDataXMLElement *)element;   //获取播放进度
-- (void)getTransportWithXMLElement:(GDataXMLElement *)element;  //获取播放状态
-- (void)getVolumeWithXMLElement:(GDataXMLElement *)element;     //获取音频信息
-
-@end
+#import "CLUPnPResponseDelegate.h"
 
 @class CLUPnPModel;
 @interface CLUPnPRenderer : NSObject
 
 @property (nonatomic, strong) CLUPnPModel *model;
-@property (nonatomic, copy) void(^succeedBlock)();
 
-@property (nonatomic, weak) id<CLUPnPRemdererDelegate>delegate;
+@property (nonatomic, weak) id<CLUPnPResponseDelegate>delegate;
 
 /**
  初始化
@@ -34,10 +25,16 @@
 - (instancetype)initWithModel:(CLUPnPModel *)model;
 
 /**
- 投屏
+ 设置投屏地址
  @param urlStr 视频url
  */
 - (void)setAVTransportURL:(NSString *)urlStr;
+
+/**
+ 设置下一个播放地址
+ @param urlStr 下一个视频url
+ */
+- (void)setNextAVTransportURI:(NSString *)urlStr;
 
 /**
  播放
@@ -53,6 +50,22 @@
  结束
  */
 - (void)stop;
+
+/**
+ 下一个
+ */
+- (void)next;
+
+/**
+ 前一个
+ */
+- (void)previous;
+
+/**
+ 跳转进度
+ @param relTime 进度时间(单位秒)
+ */
+- (void)seek:(float)relTime;
 
 /**
  跳转至特定进度或视频

@@ -23,10 +23,14 @@
 @interface CLUPnPModel : NSObject
 
 @property (nonatomic, copy) NSString *friendlyName;
+@property (nonatomic, copy) NSString *modelName;
+
 @property (nonatomic, copy) NSString *urlHeader;
 
 @property (nonatomic, strong) CLServiceModel *AVTransport;
 @property (nonatomic, strong) CLServiceModel *RenderingControl;
+
+- (void)setArray:(NSArray *)array;
 
 @end
 

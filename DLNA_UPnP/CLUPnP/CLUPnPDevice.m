@@ -1,15 +1,15 @@
 //
-//  CLUdpAssociation.m
+//  CLUPnPDevice.m
 //  DLNA_UPnP
 //
-//  Created by ClaudeLi on 16/9/29.
+//  Created by ClaudeLi on 16/10/10.
 //  Copyright © 2016年 ClaudeLi. All rights reserved.
 //
 
 #import "CLUPnP.h"
 #import "GDataXMLNode.h"
 
-@implementation CLUdpAssociation{
+@implementation CLUPnPDevice{
     NSTimer *_timer;
 }
 
@@ -32,11 +32,16 @@
     [udpSocket bindToPort:ssdpPort error:&error];
     [udpSocket joinMulticastGroup:ssdpAddres error:&error];
     [udpSocket beginReceiving:&error];
-    NSDate *date = [NSDate dateWithTimeIntervalSinceNow:15];
-    [_timer invalidate];
-    _timer = nil;
-    _timer = [[NSTimer alloc] initWithFireDate:date interval:1 target:self selector:@selector(stop) userInfo:nil repeats:NO];
-    [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+    if (error) {
+        [self stop];
+        [self onError:error];
+    }else{
+        NSDate *date = [NSDate dateWithTimeIntervalSinceNow:15];
+        [_timer invalidate];
+        _timer = nil;
+        _timer = [[NSTimer alloc] initWithFireDate:date interval:1 target:self selector:@selector(stop) userInfo:nil repeats:NO];
+        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+    }
 }
 
 - (void)stop{
@@ -48,15 +53,15 @@
 #pragma mark -
 #pragma mark -- GCDAsyncUdpSocketDelegate --
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didSendDataWithTag:(long)tag{
-    NSLog(@"发送信息成功");
+    CLLog(@"发送信息成功");
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didNotSendDataWithTag:(long)tag dueToError:(NSError * _Nullable)error{
-    NSLog(@"发送信息失败, %@", error);
+    [self onError:error];
 }
 
 - (void)udpSocketDidClose:(GCDAsyncUdpSocket *)sock withError:(NSError  * _Nullable)error{
-    NSLog(@"udpSocket关闭");
+    CLLog(@"udpSocket关闭");
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didReceiveData:(NSData *)data
@@ -88,13 +93,13 @@ withFilterContext:(nullable id)filterContext{
 
 // 获取UPnP信息
 - (void)getUPnPInfoWithLocation:(NSURL *)url{
-    NSLog(@"location == %@", url);
+    CLLog(@"Location: %@", url);
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSURLRequest  *request=[NSURLRequest requestWithURL:url];
         NSURLSession *session = [NSURLSession sharedSession];
         NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             if(error || data == nil){
-                NSLog(@"错误:%@,请重试",error);
+                [self onError:error];
                 return;
             }else{
                 CLUPnPModel *model = [[CLUPnPModel alloc] init];
@@ -102,40 +107,19 @@ withFilterContext:(nullable id)filterContext{
                 NSString *_dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                 GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithXMLString:_dataStr options:0 error:nil];
                 GDataXMLElement *xmlEle = [xmlDoc rootElement];
-                NSArray *BigArray = [xmlEle children];
+                NSArray *xmlArray = [xmlEle children];
                 
-                for (int i = 0; i < [BigArray count]; i++) {
-                    GDataXMLElement *element = [BigArray objectAtIndex:i];
-                    
+                for (int i = 0; i < [xmlArray count]; i++) {
+                    GDataXMLElement *element = [xmlArray objectAtIndex:i];
                     if ([[element name] isEqualToString:@"device"]) {
-                        NSArray *array = [element children];
-                        for (int j = 0; j < [array count]; j++) {
-                            GDataXMLElement *ele = [array objectAtIndex:j];
-                            if ([ele.name isEqualToString:@"friendlyName"]) {
-                                model.friendlyName = [ele stringValue];
-                            }
-                            if ([ele.name isEqualToString:@"serviceList"]) {
-                                NSArray *serviceListArray = [ele children];
-                                for (int k = 0; k < [serviceListArray count]; k++) {
-                                    GDataXMLElement *listEle = [serviceListArray objectAtIndex:k];
-                                    if ([listEle.name isEqualToString:@"service"]) {
-                                        if ([[listEle stringValue] rangeOfString:serviceAVTransport].location != NSNotFound) {
-                                            [model.AVTransport setArray:[listEle children]];
-                                        }else if ([[listEle stringValue] rangeOfString:serviceRenderingControl].location != NSNotFound){
-                                            [model.RenderingControl setArray:[listEle children]];
-                                        }
-                                    }
-                                }
-                                continue;
-                            }
-                        }
+                        [model setArray:[element children]];
                         continue;
                     }
                 }
                 if (model.AVTransport.controlURL) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        if ([self.delegate respondsToSelector:@selector(updSearchResultsWith:)]) {
-                            [self.delegate updSearchResultsWith:model];
+                        if ([self.delegate respondsToSelector:@selector(upnpSearchResultsWith:)]) {
+                            [self.delegate upnpSearchResultsWith:model];
                         }
                     });
                 }
@@ -144,6 +128,12 @@ withFilterContext:(nullable id)filterContext{
         // 执行任务
         [dataTask resume];
     });
+}
+
+- (void)onError:(NSError *)error{
+    if ([self.delegate respondsToSelector:@selector(upnpSearchErrorWith:)]) {
+        [self.delegate upnpSearchErrorWith:error];
+    }
 }
 
 @end
