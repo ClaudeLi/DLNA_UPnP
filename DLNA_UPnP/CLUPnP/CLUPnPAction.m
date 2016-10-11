@@ -12,21 +12,17 @@
 
 @interface CLUPnPAction (){
         NSString    *_action;
-        NSString    *_urlHeader;
 }
 @property (nonatomic, strong) GDataXMLElement *XMLElement;
-@property (nonatomic, strong) CLUPnPModel     *model;
 
 @end
 
 @implementation CLUPnPAction
 
-- (instancetype)initWithAction:(NSString *)action model:(CLUPnPModel *)model{
+- (instancetype)initWithAction:(NSString *)action{
     self = [super init];
     if (self) {
         _action = action;
-        _model = model;
-        _urlHeader = model.urlHeader;
         _serviceType = CLUPnPServiceAVTransport;
         NSString *name = [NSString stringWithFormat:@"u:%@", _action];
         self.XMLElement = [GDataXMLElement elementWithName:name];
@@ -58,19 +54,19 @@
     }
 }
 
-- (NSString *)getPostUrlString{
+- (NSString *)getPostUrlStrWith:(CLUPnPModel *)model{
     if (_serviceType == CLUPnPServiceAVTransport) {
-        return [self getUPnPURLWithUrlModel:_model.AVTransport];
+        return [self getUPnPURLWithUrlModel:model.AVTransport urlHeader:model.urlHeader];
     }else{
-        return [self getUPnPURLWithUrlModel:_model.RenderingControl];;
+        return [self getUPnPURLWithUrlModel:model.RenderingControl urlHeader:model.urlHeader];;
     }
 }
 
-- (NSString *)getUPnPURLWithUrlModel:(CLServiceModel *)model{
+- (NSString *)getUPnPURLWithUrlModel:(CLServiceModel *)model urlHeader:(NSString *)urlHeader{
     if ([[model.controlURL substringToIndex:1] isEqualToString:@"/"]) {
-        return [NSString stringWithFormat:@"%@%@", _urlHeader, model.controlURL];
+        return [NSString stringWithFormat:@"%@%@", urlHeader, model.controlURL];
     }else{
-        return [NSString stringWithFormat:@"%@/%@", _urlHeader, model.controlURL];
+        return [NSString stringWithFormat:@"%@/%@", urlHeader, model.controlURL];
     }
 }
 

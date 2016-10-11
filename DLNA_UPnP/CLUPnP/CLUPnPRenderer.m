@@ -20,10 +20,14 @@
     return self;
 }
 
+- (void)setModel:(CLUPnPModel *)model{
+    _model = model;
+}
+
 #pragma mark -
 #pragma mark -- AVTransport动作 --
 - (void)setAVTransportURL:(NSString *)urlStr{
-    CLUPnPAction *action = [[CLUPnPAction alloc] initWithAction:@"SetAVTransportURI" model:_model];
+    CLUPnPAction *action = [[CLUPnPAction alloc] initWithAction:@"SetAVTransportURI"];
     [action setArgumentValue:@"0" forName:@"InstanceID"];
     [action setArgumentValue:urlStr forName:@"CurrentURI"];
     [action setArgumentValue:@"" forName:@"CurrentURIMetaData"];
@@ -31,7 +35,7 @@
 }
 
 - (void)setNextAVTransportURI:(NSString *)urlStr{
-    CLUPnPAction *action = [[CLUPnPAction alloc] initWithAction:@"SetNextAVTransportURI" model:_model];
+    CLUPnPAction *action = [[CLUPnPAction alloc] initWithAction:@"SetNextAVTransportURI"];
     [action setArgumentValue:@"0" forName:@"InstanceID"];
     [action setArgumentValue:urlStr forName:@"NextURI"];
     [action setArgumentValue:@"" forName:@"NextURIMetaData"];
@@ -39,44 +43,44 @@
 }
 
 - (void)play{
-    CLUPnPAction *action = [[CLUPnPAction alloc] initWithAction:@"Play" model:_model];
+    CLUPnPAction *action = [[CLUPnPAction alloc] initWithAction:@"Play"];
     [action setArgumentValue:@"0" forName:@"InstanceID"];
     [action setArgumentValue:@"1" forName:@"Speed"];
     [self postRequestWith:action];
 }
 
 - (void)pause{
-    CLUPnPAction *action = [[CLUPnPAction alloc] initWithAction:@"Pause" model:_model];
+    CLUPnPAction *action = [[CLUPnPAction alloc] initWithAction:@"Pause"];
     [action setArgumentValue:@"0" forName:@"InstanceID"];
     [self postRequestWith:action];
 }
 
 - (void)stop{
-    CLUPnPAction *action = [[CLUPnPAction alloc] initWithAction:@"Stop" model:_model];
+    CLUPnPAction *action = [[CLUPnPAction alloc] initWithAction:@"Stop"];
     [action setArgumentValue:@"0" forName:@"InstanceID"];
     [self postRequestWith:action];
 }
 
 - (void)next{
-    CLUPnPAction *action = [[CLUPnPAction alloc] initWithAction:@"Next" model:_model];
+    CLUPnPAction *action = [[CLUPnPAction alloc] initWithAction:@"Next"];
     [action setArgumentValue:@"0" forName:@"InstanceID"];
     [self postRequestWith:action];
 }
 
 - (void)previous{
-    CLUPnPAction *action = [[CLUPnPAction alloc] initWithAction:@"Previous" model:_model];
+    CLUPnPAction *action = [[CLUPnPAction alloc] initWithAction:@"Previous"];
     [action setArgumentValue:@"0" forName:@"InstanceID"];
     [self postRequestWith:action];
 }
 
 - (void)getPositionInfo{
-    CLUPnPAction *action = [[CLUPnPAction alloc] initWithAction:@"GetPositionInfo" model:_model];
+    CLUPnPAction *action = [[CLUPnPAction alloc] initWithAction:@"GetPositionInfo"];
     [action setArgumentValue:@"0" forName:@"InstanceID"];
     [self postRequestWith:action];
 }
 
 - (void)getTransportInfo{
-    CLUPnPAction *action = [[CLUPnPAction alloc] initWithAction:@"GetTransportInfo" model:_model];
+    CLUPnPAction *action = [[CLUPnPAction alloc] initWithAction:@"GetTransportInfo"];
     [action setArgumentValue:@"0" forName:@"InstanceID"];
     [self postRequestWith:action];
 }
@@ -86,7 +90,7 @@
 }
 
 - (void)seekToTarget:(NSString *)target Unit:(NSString *)unit{
-    CLUPnPAction *action = [[CLUPnPAction alloc] initWithAction:@"Seek" model:_model];
+    CLUPnPAction *action = [[CLUPnPAction alloc] initWithAction:@"Seek"];
     [action setArgumentValue:@"0" forName:@"InstanceID"];
     [action setArgumentValue:unit forName:@"Unit"];
     [action setArgumentValue:target forName:@"Target"];
@@ -96,7 +100,7 @@
 #pragma mark -
 #pragma mark -- RenderingControl动作 --
 - (void)getVolume{
-    CLUPnPAction *action = [[CLUPnPAction alloc] initWithAction:@"GetVolume" model:_model];
+    CLUPnPAction *action = [[CLUPnPAction alloc] initWithAction:@"GetVolume"];
     [action setServiceType:CLUPnPServiceRenderingControl];
     [action setArgumentValue:@"0" forName:@"InstanceID"];
     [action setArgumentValue:@"Master" forName:@"Channel"];
@@ -104,7 +108,7 @@
 }
 
 - (void)setVolumeWith:(NSString *)value{
-    CLUPnPAction *action = [[CLUPnPAction alloc] initWithAction:@"SetVolume" model:_model];
+    CLUPnPAction *action = [[CLUPnPAction alloc] initWithAction:@"SetVolume"];
     [action setServiceType:CLUPnPServiceRenderingControl];
     [action setArgumentValue:@"0" forName:@"InstanceID"];
     [action setArgumentValue:@"Master" forName:@"Channel"];
@@ -116,7 +120,7 @@
 #pragma mark -- 发送动作请求 --
 - (void)postRequestWith:(CLUPnPAction *)action{
     NSURLSession *session = [NSURLSession sharedSession];
-    NSURL *url = [NSURL URLWithString:[action getPostUrlString]];
+    NSURL *url = [NSURL URLWithString:[action getPostUrlStrWith:_model]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     request.HTTPMethod = @"POST";
     [request addValue:@"text/xml" forHTTPHeaderField:@"Content-Type"];

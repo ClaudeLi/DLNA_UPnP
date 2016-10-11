@@ -19,7 +19,7 @@ typedef NS_ENUM(NSInteger, CLUPnPServiceType) {
 // serviceType 默认 CLUPnPServiceAVTransport
 @property (nonatomic, assign) CLUPnPServiceType serviceType;
 
-- (instancetype)initWithAction:(NSString *)action model:(CLUPnPModel *)model;
+- (instancetype)initWithAction:(NSString *)action;
 
 - (void)setArgumentValue:(NSString *)value forName:(NSString *)name;
 
@@ -27,7 +27,7 @@ typedef NS_ENUM(NSInteger, CLUPnPServiceType) {
 
 - (NSString *)getSOAPAction;
 
-- (NSString *)getPostUrlString;
+- (NSString *)getPostUrlStrWith:(CLUPnPModel *)model;
 
 - (NSString *)getPostXMLFile;
 

@@ -75,17 +75,17 @@
 - (void)seekToTarget:(NSString *)target Unit:(NSString *)unit;
 
 /**
- 获取播放进度,若想使用需要通过协议回调解析xml
+ 获取播放进度,可通过协议回调使用
  */
 - (void)getPositionInfo;
 
 /**
- 获取播放状态,若想使用需要通过协议回调解析xml
+ 获取播放状态,可通过协议回调使用
  */
 - (void)getTransportInfo;
 
 /**
- 获取音频，若想使用需要通过协议回调解析xml
+ 获取音频,可通过协议回调使用
  */
 - (void)getVolume;
 
