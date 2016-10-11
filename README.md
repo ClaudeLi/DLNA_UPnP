@@ -14,14 +14,14 @@
             
             c.在Build Phases->compile sources -> GDataXMLNode.m, ARC编译MRC加 -fno-objc-arc
 
-2.搜索设备 CLUdpAssociation.h <有bug待改进> 
+2.搜索设备 CLUPnPDevice.h <有bug待改进> 
         
         // 搜索
         - (void)search;
         // 停止
         - (void)stop;
         
-        [协议 CLUdpAssociationDelegate]
+        [协议 CLUPnPDeviceDelegate]
         回调方法：
         @required
         - (void)upnpSearchResultsWith:(CLUPnPModel *)model; // 搜索结果
@@ -63,20 +63,20 @@
         // unit   REL_TIME（跳转到某个进度）或 TRACK_NR（跳转到某个视频）。
         - (void)seekToTarget:(NSString *)target Unit:(NSString *)unit;
         
-        // 获取播放进度,若想使用需要通过协议回调解析xml
+        // 获取播放进度,可通过协议回调使用
         - (void)getPositionInfo;
         
-        // 获取播放状态,若想使用需要通过协议回调解析xml
+        // 获取播放状态,可通过协议回调使用
         - (void)getTransportInfo;
         
-        // 获取音频，若想使用需要通过协议回调解析xml
+        // 获取音频,可通过协议回调使用
         - (void)getVolume;
         
         // 设置音频值 value->整数字符串
         - (void)setVolumeWith:(NSString *)value;
 
         
-        [协议 CLUPnPRemdererDelegate]
+        [协议 CLUPnPResponseDelegate]
         回调方法：
         @required
         - (void)upnpSetAVTransportURIResponse;      // 设置url响应

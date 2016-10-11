@@ -8,9 +8,10 @@
 
 #import "CLControlViewController.h"
 
-//http://live.hkstv.hk.lxdns.com/live/hks/playlist.m3u8
-//http://222.73.132.145/vkphls.tc.qq.com/mp4/8/yZ_j6ME6N3hgRF2xg_m13zCxeLHcQzm9bVK0v_J-08OdcAVc0rmGCA/q4WgUBCu27O21hhzjGXkPCaHr1EkTFuUGbXKrNbjMACA-wleQI3oi3woUdjgP-BtBxW34UkmIxlQ_TkPGeqTLwghaijDM7oFlQwmCbieZPLUh33Q7f8eag/i0021mzabfm.p209.mp4/i0021mzabfm.p209.mp4.av.m3u8
-static NSString *urlStr = @"http://v.tiaooo.com/ltQ3C0vts84B-UZ9BZNvTo9lUzWU";
+static NSString *urlStr0 = @"http://v.tiaooo.com/ltQ3C0vts84B-UZ9BZNvTo9lUzWU";
+static NSString *urlStr1 = @"http://v.tiaooo.com/llbizosAzGhJPXC0H4AHLTGHl42W";
+static NSString *urlStr2 = @"http://live.hkstv.hk.lxdns.com/live/hks/playlist.m3u8";
+//static NSString *urlStr3 = @"http://222.73.132.145/vkphls.tc.qq.com/mp4/8/yZ_j6ME6N3hgRF2xg_m13zCxeLHcQzm9bVK0v_J-08OdcAVc0rmGCA/q4WgUBCu27O21hhzjGXkPCaHr1EkTFuUGbXKrNbjMACA-wleQI3oi3woUdjgP-BtBxW34UkmIxlQ_TkPGeqTLwghaijDM7oFlQwmCbieZPLUh33Q7f8eag/i0021mzabfm.p209.mp4/i0021mzabfm.p209.mp4.av.m3u8";
 
 @interface CLControlViewController ()<CLUPnPResponseDelegate>{
     BOOL _isPlaying;
@@ -26,11 +27,10 @@ static NSString *urlStr = @"http://v.tiaooo.com/ltQ3C0vts84B-UZ9BZNvTo9lUzWU";
     [super viewDidLoad];
     _valume = 0;
     
-    
     render = [[CLUPnPRenderer alloc] initWithModel:self.model];
     render.delegate = self;
-    [render setAVTransportURL:urlStr];
-    [render setNextAVTransportURI:@"http://v.tiaooo.com/llbizosAzGhJPXC0H4AHLTGHl42W"];
+    [render setAVTransportURL:urlStr0];
+    [render setNextAVTransportURI:urlStr1];
     _isPlaying = YES;
 }
 
@@ -84,11 +84,12 @@ static NSString *urlStr = @"http://v.tiaooo.com/ltQ3C0vts84B-UZ9BZNvTo9lUzWU";
 #pragma mark -
 #pragma mark - CLUPnPResponseDelegate -
 - (void)upnpSetAVTransportURIResponse{
-//    [render play];
+    //    [render play];
 }
 
 - (void)upnpGetTransportInfoResponse:(CLUPnPTransportInfo *)info{
-//    STOPPED
+    //    STOPPED
+    //    PAUSED_PLAYBACK
     NSLog(@"%@ === %@", info.currentTransportState, info.currentTransportStatus);
     if (!([info.currentTransportState isEqualToString:@"PLAYING"] || [info.currentTransportState isEqualToString:@"TRANSITIONING"])) {
         [render play];
@@ -117,6 +118,7 @@ static NSString *urlStr = @"http://v.tiaooo.com/ltQ3C0vts84B-UZ9BZNvTo9lUzWU";
 
 - (void)upnpNextResponse{
     NSLog(@"下一个");
+    [render setNextAVTransportURI:urlStr2];
 }
 
 - (void)upnpSetVolumeResponse{
