@@ -97,7 +97,7 @@
 
 
 ==============
-感谢[Eliyar's Blog](https://eliyar.biz)
+感谢作者[Eliyar's Blog](https://eliyar.biz)的两篇博客
 * [基于DLNA实现iOS，Android投屏：SSDP发现设备](https://eliyar.biz/DLNA_with_iOS_Android_Part_1_Find_Device_Using_SSDP/)
 * [基于DLNA实现iOS，Android投屏：SOAP控制设备](https://eliyar.biz/DLNA_with_iOS_Android_Part_2_Control_Using_SOAP/)
 
