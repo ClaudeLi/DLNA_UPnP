@@ -22,7 +22,7 @@
     UIButton* button = [UIButton new];
     button.frame = CGRectMake(100, 100, 100, 50);
     button.backgroundColor = [UIColor redColor];
-    [button setTitle:@"text" forState:UIControlStateNormal];
+    [button setTitle:@"搜索设备" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(clickButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
 }

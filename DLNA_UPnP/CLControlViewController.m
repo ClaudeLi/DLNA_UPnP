@@ -29,7 +29,7 @@ static NSString *urlStr2 = @"http://live.hkstv.hk.lxdns.com/live/hks/playlist.m3
     
     render = [[CLUPnPRenderer alloc] initWithModel:self.model];
     render.delegate = self;
-    [render setAVTransportURL:urlStr0];
+    [render setAVTransportURL:@"http://218.200.160.29/rdp2/v5.5/sub/listen.do?contentid=60054703976&ua=Iphone_Sst&version=4.239&netType=1&toneFlag=1"];
     [render setNextAVTransportURI:urlStr1];
     _isPlaying = YES;
 }
