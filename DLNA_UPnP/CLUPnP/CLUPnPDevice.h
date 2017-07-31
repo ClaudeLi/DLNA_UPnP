@@ -2,41 +2,37 @@
 //  CLUPnPDevice.h
 //  DLNA_UPnP
 //
-//  Created by ClaudeLi on 16/10/10.
-//  Copyright © 2016年 ClaudeLi. All rights reserved.
+//  Created by ClaudeLi on 2017/7/31.
+//  Copyright © 2017年 ClaudeLi. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "GCDAsyncUdpSocket.h"
 
-@class CLUPnPModel;
-@protocol CLUPnPDeviceDelegate <NSObject>
-@required
+@class CLServiceModel;
+@interface CLUPnPDevice : NSObject
 
-- (void)upnpSearchResultsWith:(CLUPnPModel *)model; // 搜索结果
+@property (nonatomic, copy) NSString    *uuid;
+@property (nonatomic, strong) NSURL     *loaction;
+@property (nonatomic, copy) NSString    *URLHeader;
 
-@optional
+@property (nonatomic, copy) NSString *friendlyName;
+@property (nonatomic, copy) NSString *modelName;
 
-- (void)upnpSearchErrorWith:(NSError *)error;       // 搜索失败
+@property (nonatomic, strong) CLServiceModel *AVTransport;
+@property (nonatomic, strong) CLServiceModel *RenderingControl;
+
+- (void)setArray:(NSArray *)array;
 
 @end
 
-@interface CLUPnPDevice : NSObject<GCDAsyncUdpSocketDelegate>
-{
-    GCDAsyncUdpSocket *udpSocket;
-}
+@interface CLServiceModel : NSObject
 
-@property (nonatomic,weak) id<CLUPnPDeviceDelegate>delegate;
+@property (nonatomic, copy) NSString *serviceType;
+@property (nonatomic, copy) NSString *serviceId;
+@property (nonatomic, copy) NSString *controlURL;
+@property (nonatomic, copy) NSString *eventSubURL;
+@property (nonatomic, copy) NSString *SCPDURL;
 
-/**
- 搜索
- */
-- (void)search;
-
-/**
- 停止
- */
-- (void)stop;
-
+- (void)setArray:(NSArray *)array;
 
 @end

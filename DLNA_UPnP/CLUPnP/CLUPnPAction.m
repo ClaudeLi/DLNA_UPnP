@@ -54,11 +54,11 @@
     }
 }
 
-- (NSString *)getPostUrlStrWith:(CLUPnPModel *)model{
+- (NSString *)getPostUrlStrWith:(CLUPnPDevice *)model{
     if (_serviceType == CLUPnPServiceAVTransport) {
-        return [self getUPnPURLWithUrlModel:model.AVTransport urlHeader:model.urlHeader];
+        return [self getUPnPURLWithUrlModel:model.AVTransport urlHeader:model.URLHeader];
     }else{
-        return [self getUPnPURLWithUrlModel:model.RenderingControl urlHeader:model.urlHeader];;
+        return [self getUPnPURLWithUrlModel:model.RenderingControl urlHeader:model.URLHeader];;
     }
 }
 

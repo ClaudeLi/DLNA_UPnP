@@ -10,10 +10,10 @@
 #import <Foundation/Foundation.h>
 #import "CLUPnPResponseDelegate.h"
 
-@class CLUPnPModel;
+@class CLUPnPDevice;
 @interface CLUPnPRenderer : NSObject
 
-@property (nonatomic, strong) CLUPnPModel *model;
+@property (nonatomic, strong) CLUPnPDevice *model;
 
 @property (nonatomic, weak) id<CLUPnPResponseDelegate>delegate;
 
@@ -22,7 +22,7 @@
  @param model 搜索得到的UPnPModel
  @return self
  */
-- (instancetype)initWithModel:(CLUPnPModel *)model;
+- (instancetype)initWithModel:(CLUPnPDevice *)model;
 
 /**
  设置投屏地址

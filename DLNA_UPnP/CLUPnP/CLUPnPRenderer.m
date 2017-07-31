@@ -12,7 +12,7 @@
 
 @implementation CLUPnPRenderer
 
-- (instancetype)initWithModel:(CLUPnPModel *)model{
+- (instancetype)initWithModel:(CLUPnPDevice *)model{
     self = [super init];
     if (self) {
         _model = model;
@@ -20,7 +20,7 @@
     return self;
 }
 
-- (void)setModel:(CLUPnPModel *)model{
+- (void)setModel:(CLUPnPDevice *)model{
     _model = model;
 }
 

@@ -14,19 +14,26 @@
             
             c.在Build Phases->compile sources -> GDataXMLNode.m, ARC编译MRC加 -fno-objc-arc
 
-2.搜索设备 CLUPnPDevice.h <有bug待改进> 
+2.搜索设备 CLUPnPServer.h  
         
         // 搜索
-        - (void)search;
+        - (void)start;
         // 停止
         - (void)stop;
         
-        [协议 CLUPnPDeviceDelegate]
+        [协议 CLUPnPServerDelegate]
         回调方法：
         @required
-        - (void)upnpSearchResultsWith:(CLUPnPModel *)model; // 搜索结果
+        /**
+        搜索结果
+        
+        @param devices 设备数组
+        */
+        - (void)upnpSearchChangeWithResults:(NSArray <CLUPnPDevice *>*)devices;
+
         @optional
-        - (void)upnpSearchErrorWith:(NSError *)error;       // 搜索失败
+
+        - (void)upnpSearchErrorWithError:(NSError *)error;       // 搜索失败
 
 3.控制设备 CLUPnPRenderer.h
         

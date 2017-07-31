@@ -9,9 +9,9 @@
 #ifndef CLUPnP_h
 #define CLUPnP_h
 
-#import "CLUPnPDevice.h"
+#import "CLUPnPServer.h"
 #import "CLUPnPRenderer.h"
-#import "CLUPnPModel.h"
+#import "CLUPnPDevice.h"
 #import "CLUPnPAVPositionInfo.h"
 
 #ifdef DEBUG
@@ -22,6 +22,9 @@
 
 static NSString *ssdpAddres = @"239.255.255.250";
 static UInt16   ssdpPort = 1900;
+
+static NSString *serviceIdAVTransport       = @"urn:upnp-org:serviceId:AVTransport";
+static NSString *serviceIdRenderingControl  = @"urn:upnp-org:serviceId:RenderingControl";
 
 static NSString *serviceAVTransport         = @"urn:schemas-upnp-org:service:AVTransport:1";
 static NSString *serviceRenderingControl    = @"urn:schemas-upnp-org:service:RenderingControl:1";

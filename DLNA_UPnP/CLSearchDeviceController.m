@@ -11,9 +11,9 @@
 #import "CLControlViewController.h"
 
 static NSString *cellIdentifier = @"cellIdentifier";
-@interface CLSearchDeviceController ()<UITableViewDataSource, UITableViewDelegate, CLUPnPDeviceDelegate>
+@interface CLSearchDeviceController ()<UITableViewDataSource, UITableViewDelegate, CLUPnPServerDelegate>
 {
-    CLUPnPDevice *upd;
+    CLUPnPServer *upd;
 }
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
@@ -34,7 +34,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    upd = [[CLUPnPDevice alloc] init];
+    upd = [CLUPnPServer shareServer];
     upd.delegate = self;
     
     [self.view addSubview:self.tableView];
@@ -42,24 +42,22 @@ static NSString *cellIdentifier = @"cellIdentifier";
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [upd search];
+    [upd start];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [upd stop];
-//    [self.dataArray removeAllObjects];
-    [self.tableView reloadData];
 }
 
 #pragma mark -
 #pragma mark -- 搜索协议CLUPnPDeviceDelegate回调 --
-- (void)upnpSearchResultsWith:(CLUPnPModel *)model{
-    [self.dataArray addObject:model];
+- (void)upnpSearchChangeWithResults:(NSArray<CLUPnPDevice *> *)devices{
+    self.dataArray = devices.mutableCopy;
     [self.tableView reloadData];
 }
 
-- (void)upnpSearchErrorWith:(NSError *)error{
+- (void)upnpSearchErrorWithError:(NSError *)error{
     NSLog(@"error==%@", error);
 }
 
@@ -95,7 +93,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     }
     if (indexPath.row < self.dataArray.count) {
-        CLUPnPModel *model = self.dataArray[indexPath.row];
+        CLUPnPDevice *model = self.dataArray[indexPath.row];
         cell.textLabel.text = model.friendlyName;
     }
     return cell;
@@ -104,7 +102,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row < self.dataArray.count) {
-        CLUPnPModel *model = self.dataArray[indexPath.row];
+        CLUPnPDevice *model = self.dataArray[indexPath.row];
         
         CLControlViewController *controlVC = [[CLControlViewController alloc] init];
         controlVC.model = model;

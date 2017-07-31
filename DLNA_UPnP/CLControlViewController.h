@@ -11,6 +11,6 @@
 
 @interface CLControlViewController : UIViewController
 
-@property (nonatomic, strong) CLUPnPModel *model;
+@property (nonatomic, strong) CLUPnPDevice *model;
 
 @end

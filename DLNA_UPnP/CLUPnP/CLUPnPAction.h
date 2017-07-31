@@ -13,7 +13,7 @@ typedef NS_ENUM(NSInteger, CLUPnPServiceType) {
     CLUPnPServiceRenderingControl,  // @"urn:schemas-upnp-org:service:RenderingControl:1"
 };
 
-@class CLUPnPModel;
+@class CLUPnPDevice;
 @interface CLUPnPAction : NSObject
 
 // serviceType 默认 CLUPnPServiceAVTransport
@@ -27,7 +27,7 @@ typedef NS_ENUM(NSInteger, CLUPnPServiceType) {
 
 - (NSString *)getSOAPAction;
 
-- (NSString *)getPostUrlStrWith:(CLUPnPModel *)model;
+- (NSString *)getPostUrlStrWith:(CLUPnPDevice *)model;
 
 - (NSString *)getPostXMLFile;
 
