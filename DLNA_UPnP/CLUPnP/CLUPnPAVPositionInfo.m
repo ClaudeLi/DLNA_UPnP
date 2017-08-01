@@ -12,16 +12,18 @@
 @implementation CLUPnPAVPositionInfo
 
 - (void)setArray:(NSArray *)array{
-    for (int m = 0; m < array.count; m++) {
-        GDataXMLElement *needEle = [array objectAtIndex:m];
-        if ([needEle.name isEqualToString:@"TrackDuration"]) {
-            self.trackDuration = [[needEle stringValue] durationTime];
-        }
-        if ([needEle.name isEqualToString:@"RelTime"]) {
-            self.relTime = [[needEle stringValue] durationTime];
-        }
-        if ([needEle.name isEqualToString:@"AbsTime"]) {
-            self.absTime = [[needEle stringValue] durationTime];
+    @autoreleasepool {
+        for (int m = 0; m < array.count; m++) {
+            GDataXMLElement *needEle = [array objectAtIndex:m];
+            if ([needEle.name isEqualToString:@"TrackDuration"]) {
+                self.trackDuration = [[needEle stringValue] durationTime];
+            }
+            if ([needEle.name isEqualToString:@"RelTime"]) {
+                self.relTime = [[needEle stringValue] durationTime];
+            }
+            if ([needEle.name isEqualToString:@"AbsTime"]) {
+                self.absTime = [[needEle stringValue] durationTime];
+            }
         }
     }
 }
@@ -31,16 +33,18 @@
 @implementation CLUPnPTransportInfo
 
 - (void)setArray:(NSArray *)array{
-    for (int m = 0; m < array.count; m++) {
-        GDataXMLElement *needEle = [array objectAtIndex:m];
-        if ([needEle.name isEqualToString:@"CurrentTransportState"]) {
-            self.currentTransportState = [needEle stringValue];
-        }
-        if ([needEle.name isEqualToString:@"CurrentTransportStatus"]) {
-            self.currentTransportStatus = [needEle stringValue];
-        }
-        if ([needEle.name isEqualToString:@"CurrentSpeed"]) {
-            self.currentSpeed = [needEle stringValue];
+    @autoreleasepool {        
+        for (int m = 0; m < array.count; m++) {
+            GDataXMLElement *needEle = [array objectAtIndex:m];
+            if ([needEle.name isEqualToString:@"CurrentTransportState"]) {
+                self.currentTransportState = [needEle stringValue];
+            }
+            if ([needEle.name isEqualToString:@"CurrentTransportStatus"]) {
+                self.currentTransportStatus = [needEle stringValue];
+            }
+            if ([needEle.name isEqualToString:@"CurrentSpeed"]) {
+                self.currentSpeed = [needEle stringValue];
+            }
         }
     }
 }

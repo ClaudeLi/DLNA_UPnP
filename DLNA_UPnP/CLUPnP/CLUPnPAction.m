@@ -40,17 +40,17 @@
 
 - (NSString *)getServiceType{
     if (_serviceType == CLUPnPServiceAVTransport) {
-        return serviceAVTransport;
+        return serviceType_AVTransport;
     }else{
-        return serviceRenderingControl;
+        return serviceType_RenderingControl;
     }
 }
 
 - (NSString *)getSOAPAction{
     if (_serviceType == CLUPnPServiceAVTransport) {
-        return [NSString stringWithFormat:@"\"%@#%@\"", serviceAVTransport, _action];
+        return [NSString stringWithFormat:@"\"%@#%@\"", serviceType_AVTransport, _action];
     }else{
-        return [NSString stringWithFormat:@"\"%@#%@\"", serviceRenderingControl, _action];
+        return [NSString stringWithFormat:@"\"%@#%@\"", serviceType_RenderingControl, _action];
     }
 }
 

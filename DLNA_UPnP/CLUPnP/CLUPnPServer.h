@@ -35,7 +35,7 @@
 + (instancetype)shareServer;
 
 /**
- 开始搜索
+ 启动Server并搜索
  */
 - (void)start;
 
@@ -43,6 +43,11 @@
  停止
  */
 - (void)stop;
+
+/**
+ 搜索
+ */
+- (void)search;
 
 /**
  获取已经发现的设备

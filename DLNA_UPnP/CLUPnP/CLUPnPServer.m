@@ -58,14 +58,13 @@
 }
 
 - (NSString *)getSearchString{
-    return [NSString stringWithFormat:@"M-SEARCH * HTTP/1.1\r\nHOST: %@:%d\r\nMAN: \"ssdp:discover\"\r\nMX: 3\r\nST: %@\r\nUSER-AGENT: iOS UPnP/1.1 Tiaooo/1.0\r\n\r\n", ssdpAddres, ssdpPort, serviceAVTransport];
+    return [NSString stringWithFormat:@"M-SEARCH * HTTP/1.1\r\nHOST: %@:%d\r\nMAN: \"ssdp:discover\"\r\nMX: 3\r\nST: %@\r\nUSER-AGENT: iOS UPnP/1.1 Tiaooo/1.0\r\n\r\n", ssdpAddres, ssdpPort, serviceType_AVTransport];
 }
 
 - (void)start{
     NSError *error = nil;
     if (![_udpSocket bindToPort:ssdpPort error:&error]){
         [self onError:error];
-        [_udpSocket bindToPort:0 error:nil];
     }
     
     if (![_udpSocket beginReceiving:&error])
@@ -77,7 +76,6 @@
     {
         [self onError:error];
     }
-    
     [self search];
 }
 
@@ -123,7 +121,7 @@ withFilterContext:(nullable id)filterContext{
         NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         if ([string hasPrefix:@"NOTIFY"]) {
             NSString *serviceType = [self headerValueForKey:@"NT:" inData:string];
-            if ([serviceType isEqualToString:serviceAVTransport]) {
+            if ([serviceType isEqualToString:serviceType_AVTransport]) {
                 NSString *location = [self headerValueForKey:@"Location:" inData:string];
                 NSString *usn = [self headerValueForKey:@"USN:" inData:string];
                 NSString *ssdp = [self headerValueForKey:@"NTS:" inData:string];
@@ -214,8 +212,7 @@ withFilterContext:(nullable id)filterContext{
     
     NSRange keyRange = [str rangeOfString:key options:NSCaseInsensitiveSearch];
     
-    if (keyRange.location == NSNotFound)
-    {
+    if (keyRange.location == NSNotFound){
         return @"";
     }
     
@@ -267,16 +264,13 @@ withFilterContext:(nullable id)filterContext{
 }
 
 - (BOOL)isNilString:(NSString *)_str{
-    if ([_str isKindOfClass:[NSNull class]]) {
+    if(_str == nil || _str == NULL || [_str isEqual:@"null"] || [_str isEqual:[NSNull null]] || [_str isKindOfClass:[NSNull class]]){
         return YES;
     }
-    _str = [NSString stringWithFormat:@"%@", _str];
     if (![_str isKindOfClass:[NSString class]]) {
         return YES;
     }
-    if(_str==nil||_str==NULL||[_str isEqual:@"null"]||[_str isEqual:[NSNull null]]||[_str isKindOfClass:[NSNull class]]){
-        return YES;
-    }
+    _str = [NSString stringWithFormat:@"%@", _str];
     if([_str isEqualToString:@"(null)"]){
         return YES;
     }

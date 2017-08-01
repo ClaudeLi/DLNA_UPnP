@@ -23,11 +23,12 @@
 static NSString *ssdpAddres = @"239.255.255.250";
 static UInt16   ssdpPort = 1900;
 
-static NSString *serviceIdAVTransport       = @"urn:upnp-org:serviceId:AVTransport";
-static NSString *serviceIdRenderingControl  = @"urn:upnp-org:serviceId:RenderingControl";
+static NSString *serviceType_AVTransport        = @"urn:schemas-upnp-org:service:AVTransport:1";
+static NSString *serviceType_RenderingControl   = @"urn:schemas-upnp-org:service:RenderingControl:1";
 
-static NSString *serviceAVTransport         = @"urn:schemas-upnp-org:service:AVTransport:1";
-static NSString *serviceRenderingControl    = @"urn:schemas-upnp-org:service:RenderingControl:1";
+static NSString *serviceId_AVTransport          = @"urn:upnp-org:serviceId:AVTransport";
+static NSString *serviceId_RenderingControl     = @"urn:upnp-org:serviceId:RenderingControl";
+
 
 static NSString *unitREL_TIME = @"REL_TIME";
 static NSString *unitTRACK_NR = @"TRACK_NR";
