@@ -120,19 +120,19 @@
 #pragma mark -- 发送动作请求 --
 - (void)postRequestWith:(CLUPnPAction *)action{
     NSURLSession *session = [NSURLSession sharedSession];
-    NSURL *url = [NSURL URLWithString:[action getPostUrlStrWith:_model]];
+    NSURL       *url = [NSURL URLWithString:[action getPostUrlStrWith:_model]];
+    NSString    *postXML = [action getPostXMLFile];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     request.HTTPMethod = @"POST";
     [request addValue:@"text/xml" forHTTPHeaderField:@"Content-Type"];
     [request addValue:[action getSOAPAction] forHTTPHeaderField:@"SOAPAction"];
-    request.HTTPBody = [[action getPostXMLFile] dataUsingEncoding:NSUTF8StringEncoding];
+    request.HTTPBody = [postXML dataUsingEncoding:NSUTF8StringEncoding];
     NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error || data == nil) {
-            CLLog(@"error=%@", error);
-            [self _UndefinedResponse:[action getPostXMLFile]];
+            [self _UndefinedResponse:nil postXML:postXML];
             return;
         }else{
-            [self parseRequestResponseData:data];
+            [self parseRequestResponseData:data postXML:postXML];
         }
     }];
     [dataTask resume];
@@ -140,7 +140,7 @@
 
 #pragma mark -
 #pragma mark -- 动作响应 --
-- (void)parseRequestResponseData:(NSData *)data{
+- (void)parseRequestResponseData:(NSData *)data postXML:(NSString *)postXML{
     GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithData:data options:0 error:nil];
     GDataXMLElement *xmlEle = [xmlDoc rootElement];
     NSArray *bigArray = [xmlEle children];
@@ -148,14 +148,14 @@
         GDataXMLElement *element = [bigArray objectAtIndex:i];
         NSArray *needArr = [element children];
         if ([[element name] hasSuffix:@"Body"]) {
-            [self resultsWith:needArr];
+            [self resultsWith:needArr postXML:postXML];
         }else{
-            [self _UndefinedResponse:[xmlEle XMLString]];
+            [self _UndefinedResponse:[xmlEle XMLString] postXML:postXML];
         }
     }
 }
 
-- (void)resultsWith:(NSArray *)array{
+- (void)resultsWith:(NSArray *)array postXML:(NSString *)postXML{
     for (int i = 0; i < array.count; i++) {
         GDataXMLElement *ele = [array objectAtIndex:i];
         if ([[ele name] hasSuffix:@"SetAVTransportURIResponse"]) {
@@ -184,7 +184,7 @@
         }else if ([[ele name] hasSuffix:@"GetTransportInfoResponse"]){
             [self _GetTransportInfoResponseWith:[ele children]];
         }else{
-            [self _UndefinedResponse:[ele XMLString]];
+            [self _UndefinedResponse:[ele XMLString] postXML:postXML];
         }
     }
 }
@@ -272,9 +272,9 @@
     }
 }
 
-- (void)_UndefinedResponse:(NSString *)xmlStr{
-    if ([self.delegate respondsToSelector:@selector(upnpUndefinedResponse:)]) {
-        [self.delegate upnpUndefinedResponse:xmlStr];
+- (void)_UndefinedResponse:(NSString *)xmlStr postXML:(NSString *)postXML{
+    if ([self.delegate respondsToSelector:@selector(upnpUndefinedResponse:postXML:)]) {
+        [self.delegate upnpUndefinedResponse:xmlStr postXML:postXML];
     }
 }
 

@@ -84,7 +84,7 @@ static NSString *urlStr2 = @"http://live.hkstv.hk.lxdns.com/live/hks/playlist.m3
 #pragma mark -
 #pragma mark - CLUPnPResponseDelegate -
 - (void)upnpSetAVTransportURIResponse{
-    //    [render play];
+    [render play];
 }
 
 - (void)upnpGetTransportInfoResponse:(CLUPnPTransportInfo *)info{
@@ -137,8 +137,9 @@ static NSString *urlStr2 = @"http://live.hkstv.hk.lxdns.com/live/hks/playlist.m3
     NSLog(@"%f, === %f === %f", info.trackDuration, info.absTime, info.relTime);
 }
 
-- (void)upnpUndefinedResponse:(NSString *)xmlString{
-    NSLog(@"xmlString = %@", xmlString);
+- (void)upnpUndefinedResponse:(NSString *)resXML postXML:(NSString *)postXML{
+    NSLog(@"postXML = %@", postXML);
+    NSLog(@"resXML = %@", resXML);
 }
 
 

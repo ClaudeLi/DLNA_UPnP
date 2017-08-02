@@ -21,6 +21,14 @@
 
 @optional
 
+/**
+ 未定义的响应/错误
+ 
+ @param resXML  响应XML
+ @param postXML 请求的动作
+ */
+- (void)upnpUndefinedResponse:(NSString *)resXML postXML:(NSString *)postXML;
+
 - (void)upnpPlayResponse;                   // 播放响应
 - (void)upnpPauseResponse;                  // 暂停响应
 - (void)upnpStopResponse;                   // 停止投屏
@@ -31,6 +39,6 @@
 - (void)upnpSetNextAVTransportURIResponse;  // 设置下一个url响应
 - (void)upnpGetVolumeResponse:(NSString *)volume;                   // 获取音频信息
 - (void)upnpGetPositionInfoResponse:(CLUPnPAVPositionInfo *)info;   // 获取播放进度
-- (void)upnpUndefinedResponse:(NSString *)xmlString;                // 未定义的响应/错误
+
 
 @end
