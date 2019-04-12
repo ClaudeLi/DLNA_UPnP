@@ -1,0 +1,27 @@
+PODS:
+  - CocoaAsyncSocket (7.6.3)
+  - DLNA_UPnP (1.0.0):
+    - DLNA_UPnP/UPnP (= 1.0.0)
+  - DLNA_UPnP/GData (1.0.0)
+  - DLNA_UPnP/UPnP (1.0.0):
+    - CocoaAsyncSocket
+    - DLNA_UPnP/GData
+
+DEPENDENCIES:
+  - DLNA_UPnP (from `../`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - CocoaAsyncSocket
+
+EXTERNAL SOURCES:
+  DLNA_UPnP:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  CocoaAsyncSocket: eafaa68a7e0ec99ead0a7b35015e0bf25d2c8987
+  DLNA_UPnP: 6670880823e383cc1a65fae761f1df120e5fa936
+
+PODFILE CHECKSUM: 96455c28601491e39c86bfc60d931da3d5daf6ec
+
+COCOAPODS: 1.6.1

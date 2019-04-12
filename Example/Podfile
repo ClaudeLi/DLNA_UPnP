@@ -1,0 +1,11 @@
+platform :ios, '8.0'
+
+target 'DLNA_UPnP_Example' do
+  pod 'DLNA_UPnP', :path => '../'
+
+  target 'DLNA_UPnP_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
