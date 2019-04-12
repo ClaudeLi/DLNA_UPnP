@@ -2,7 +2,8 @@
 基于DLNA实现iOS投屏，SSDP发现设备及SOAP控制设备
 
 ## Installation
-```一. local pod 导入
+```
+一. local pod 导入
 在Build Phases->link binary with libraries,添加libxml2.tbd
 
 二. 导入 CLUPnP 文件夹
@@ -17,7 +18,8 @@ c.在Build Phases->compile sources -> GDataXMLNode.m, ARC编译MRC加 -fno-objc-
 ```
 
 ## Using
-``` 1.搜索设备 CLUPnPServer.h  
+``` 
+1.搜索设备 CLUPnPServer.h  
 
 // 搜索
 - (void)start;
